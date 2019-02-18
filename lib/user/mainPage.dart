@@ -27,7 +27,7 @@ class _MainSections extends State<_MainSectionsWidget> {
               CachedNetworkImage(
                 placeholder: CircularProgressIndicator(),
                 imageUrl:
-                "http://www.clker.com/cliparts/3/3/K/d/7/k/purple-square-light-hi.png",
+                    "http://www.clker.com/cliparts/3/3/K/d/7/k/purple-square-light-hi.png",
               ),
               Center(
                 child: Text("section"),

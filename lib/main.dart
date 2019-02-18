@@ -57,8 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
 //      key: _scaffoldKey,
       appBar: AppBar(
         leading: Builder(
-            builder: (context) =>
-                IconButton(
+            builder: (context) => IconButton(
                   icon: Icon(Icons.dehaze),
                   onPressed: () => Scaffold.of(context).openDrawer(),
                 )),
@@ -84,9 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Text("المتاجر"),
             activeIcon: Icon(
               Icons.home,
-              color: Theme
-                  .of(context)
-                  .accentColor,
+              color: Theme.of(context).accentColor,
             ),
           ),
           BottomNavigationBarItem(
