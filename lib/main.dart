@@ -72,28 +72,33 @@ class _MyHomePageState extends State<MyHomePage> {
         items: [
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.grid_on,
+                Icons.home,
               ),
               activeIcon: Icon(
-                Icons.grid_on,
+                Icons.home,
                 color: Theme.of(context).accentColor,
               ),
               title: Text("تسوق")),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text("المتاجر"),
+            icon: Icon(Icons.shopping_cart),
+            title: Text("سلة المشتريات"),
             activeIcon: Icon(
-              Icons.home,
-              color: Theme.of(context).accentColor,
+              Icons.shopping_cart,
+              color: Theme
+                  .of(context)
+                  .accentColor,
             ),
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart),
-              title: Text("سلة المشتريات"),
-              activeIcon: Icon(
-                Icons.shopping_cart,
-                color: Theme.of(context).accentColor,
-              )),
+            icon: Icon(Icons.history),
+            title: Text("الطلبات السابقة"),
+            activeIcon: Icon(
+              Icons.history,
+              color: Theme
+                  .of(context)
+                  .accentColor,
+            ),
+          ),
         ],
       ),
     );
