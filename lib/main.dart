@@ -82,7 +82,9 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Text("المتاجر"),
             activeIcon: Icon(
               Icons.home,
-              color: Theme.of(context).accentColor,
+              color: Theme
+                  .of(context)
+                  .accentColor,
             ),
           ),
           BottomNavigationBarItem(
