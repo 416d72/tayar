@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tayar/user/main.dart';
-// User's pages:
+import 'package:tayar/common/search.dart';
+import 'package:tayar/common/sideDrawer.dart';
+import 'package:tayar/user/cartPage.dart';
+import 'package:tayar/user/mainPage.dart';
+import 'package:tayar/user/preferencesPage.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -35,8 +42,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentPage = 0;
-  final List<Widget> _pages = [MainList(), MainList(), MainList()];
-
+  final List<Widget> _pages = [MainPage(), CartPage(), PreferencesPage()];
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -46,34 +52,44 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(),
+//      key: _scaffoldKey,
+      appBar: AppBar(
+        leading: Builder(
+            builder: (context) =>
+                IconButton(
+                  icon: Icon(Icons.dehaze),
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                )),
+        title: SearchFieldWidget(),
+      ),
       body: _pages[_currentPage],
+      drawer: SideDrawer(),
       bottomNavigationBar: BottomNavigationBar(
         onTap: updateCurrentPage,
         currentIndex: _currentPage,
         items: [
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.home,
+                Icons.grid_on,
               ),
               activeIcon: Icon(
-                Icons.home,
+                Icons.grid_on,
                 color: Theme.of(context).accentColor,
               ),
-              title: Text("الرئيسية")),
+              title: Text("تسوق")),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            title: Text("سلة المشتريات"),
+            icon: Icon(Icons.home),
+            title: Text("المتاجر"),
             activeIcon: Icon(
-              Icons.shopping_cart,
+              Icons.home,
               color: Theme.of(context).accentColor,
             ),
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle),
-              title: Text("الإعدادات"),
+              icon: Icon(Icons.shopping_cart),
+              title: Text("سلة المشتريات"),
               activeIcon: Icon(
-                Icons.account_circle,
+                Icons.shopping_cart,
                 color: Theme.of(context).accentColor,
               )),
         ],

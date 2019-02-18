@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
 
-class MainList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: _SearchFieldWidget(),
-    );
-  }
-}
-
-class _SearchFieldWidget extends StatefulWidget {
+class SearchFieldWidget extends StatefulWidget {
   @override
   _SearchField createState() => _SearchField();
 }
 
-class _SearchField extends State<_SearchFieldWidget> {
+class _SearchField extends State<SearchFieldWidget> {
   // Display search input field
   @override
   Widget build(BuildContext context) {
@@ -25,8 +16,7 @@ class _SearchField extends State<_SearchFieldWidget> {
       child: TextFormField(
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(0.0),
-          icon: Icon(Icons.search),
-          labelText: "بتدور على ايه ..",
+          labelText: "بتدور على ايه؟",
         ),
       ),
     );
