@@ -37,6 +37,14 @@ class SideDrawer extends StatelessWidget {
             height: 0.0,
           ),
           ListTile(
+            leading: Icon(Icons.store),
+            title: Text("المتاجر"),
+            onTap: null,
+          ),
+          Divider(
+            height: 0.0,
+          ),
+          ListTile(
             leading: Icon(Icons.report_problem),
             title: Text("بلغ عن مشكلة"),
             onTap: null,
