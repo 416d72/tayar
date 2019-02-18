@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatelessWidget {
@@ -20,20 +21,21 @@ class _MainSections extends State<_MainSectionsWidget> {
     return GridView.count(
       crossAxisCount: 2,
       children: List.generate(16, (index) {
-        return Center(
-            child: FlatButton(
-                onPressed: null,
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      "قسم $index",
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .headline,
-                    ),
-                  ],
-                )));
+        return FlatButton(
+          child: Stack(
+            children: <Widget>[
+              CachedNetworkImage(
+                placeholder: CircularProgressIndicator(),
+                imageUrl:
+                "http://www.clker.com/cliparts/3/3/K/d/7/k/purple-square-light-hi.png",
+              ),
+              Center(
+                child: Text("section"),
+              )
+            ],
+          ),
+          onPressed: () => null,
+        );
       }),
     );
   }
