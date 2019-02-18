@@ -31,7 +31,8 @@ class MyApp extends StatelessWidget {
       locale: Locale("ar", "EG"),
       // General app settings
       title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.orange, fontFamily: 'Frutiger'),
+      theme:
+      ThemeData(primarySwatch: Colors.deepOrange, fontFamily: 'Frutiger'),
       home: MyHomePage(),
     );
   }
