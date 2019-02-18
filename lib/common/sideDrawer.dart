@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SideDrawer extends StatelessWidget {
+  final String userName = "عمرو";
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -8,16 +10,15 @@ class SideDrawer extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             child: Column(
-              children: <Widget>[Icon(Icons.landscape), Text("اللوجو")],
+              // TODO Username, User avatar
+              children: <Widget>[
+                Icon(Icons.account_circle),
+                FlatButton(
+                  child: Text("تسجيل الدخول"),
+                  onPressed: () => null,
+                )
+              ],
             ),
-          ),
-          ListTile(
-            leading: Icon(Icons.account_circle),
-            title: Text("تسجيل الدخول"),
-            onTap: null,
-          ),
-          Divider(
-            height: 0.0,
           ),
           ListTile(
             leading: Icon(Icons.favorite),

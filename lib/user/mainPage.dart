@@ -21,14 +21,19 @@ class _MainSections extends State<_MainSectionsWidget> {
       crossAxisCount: 2,
       children: List.generate(16, (index) {
         return Center(
-          child: Text(
-            "item $index",
-            style: Theme
-                .of(context)
-                .textTheme
-                .headline,
-          ),
-        );
+            child: FlatButton(
+                onPressed: null,
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      "قسم $index",
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .headline,
+                    ),
+                  ],
+                )));
       }),
     );
   }
