@@ -8,7 +8,9 @@ import 'package:tayar/user/mainPage.dart';
 import 'package:tayar/user/preferencesPage.dart';
 
 void main() {
+  // Force portrait mode
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  // Main app
   runApp(MyApp());
 }
 
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // Layout direction:
+      // Layout direction
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate
