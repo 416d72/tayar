@@ -4,8 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tayar/common/search.dart';
 import 'package:tayar/common/sideDrawer.dart';
 import 'package:tayar/user/cartPage.dart';
+import 'package:tayar/user/historyPage.dart';
 import 'package:tayar/user/mainPage.dart';
-import 'package:tayar/user/preferencesPage.dart';
 
 void main() {
   // Force portrait mode
@@ -45,7 +45,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentPage = 0;
-  final List<Widget> _pages = [MainPage(), CartPage(), PreferencesPage()];
+  final List<Widget> _pages = [MainPage(), CartPage(), HistoryPage()];
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
