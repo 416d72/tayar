@@ -10,10 +10,12 @@ class _SearchField extends State<SearchFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment(0.0, -1.0),
-      height: 50.0,
-      margin: EdgeInsets.fromLTRB(5.0, 0.0, 10.0, 0.0),
+//      alignment: Alignment(0.0, -1.0),
       child: TextFormField(
+        style: Theme
+            .of(context)
+            .textTheme
+            .subhead,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(0.0),
           labelText: "بتدور على ايه؟",

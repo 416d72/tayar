@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tayar/common/search.dart';
-import 'package:tayar/common/sideDrawer.dart';
-import 'package:tayar/user/cartPage.dart';
-import 'package:tayar/user/historyPage.dart';
-import 'package:tayar/user/mainPage.dart';
+import 'package:tayar/common/sideDrawer/sideDrawer.dart';
+import 'package:tayar/common/theme.dart';
+import 'package:tayar/users/client/cartPage.dart';
+import 'package:tayar/users/client/historyPage.dart';
+import 'package:tayar/users/client/mainPage.dart';
 
 void main() {
   // Force portrait mode
@@ -29,10 +30,8 @@ class MyApp extends StatelessWidget {
         Locale("ar", "EG"),
       ],
       locale: Locale("ar", "EG"),
-      // General app settings
-      title: 'Flutter Demo',
-      theme:
-      ThemeData(primarySwatch: Colors.deepOrange, fontFamily: 'Frutiger'),
+      title: 'Tayar',
+      theme: customTheme(),
       home: MyHomePage(),
     );
   }
@@ -78,10 +77,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 Icons.home,
                 color: Theme.of(context).accentColor,
               ),
-              title: Text("تسوق")),
+              title: Text(
+                "المنتجات",
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .subhead,
+              )),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
-            title: Text("سلة المشتريات"),
+            title: Text(
+              "السلة",
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .subhead,
+            ),
             activeIcon: Icon(
               Icons.shopping_cart,
               color: Theme
@@ -91,7 +102,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.history),
-            title: Text("الطلبات السابقة"),
+            title: Text(
+              "الطلبات السابقة",
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .subhead,
+            ),
             activeIcon: Icon(
               Icons.history,
               color: Theme
