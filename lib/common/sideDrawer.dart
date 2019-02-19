@@ -6,7 +6,7 @@ class SideDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
+      child: Column(
         children: <Widget>[
           DrawerHeader(
             child: Column(
@@ -20,35 +20,48 @@ class SideDrawer extends StatelessWidget {
               ],
             ),
           ),
-          ListTile(
-            leading: Icon(Icons.favorite),
-            title: Text("المنتجات المفضلة"),
-            onTap: null,
+          Expanded(
+            child: ListView(
+              children: <Widget>[
+                ListTile(
+                  leading: Icon(Icons.favorite),
+                  title: Text("المنتجات المفضلة"),
+                  onTap: null,
+                ),
+                Divider(
+                  height: 0.0,
+                ),
+                ListTile(
+                  leading: Icon(Icons.store),
+                  title: Text("المتاجر"),
+                  onTap: null,
+                ),
+                Divider(
+                  height: 0.0,
+                ),
+                ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text("الإعدادات"),
+                  onTap: null,
+                ),
+              ],
+            ),
           ),
-          Divider(
-            height: 0.0,
-          ),
-          ListTile(
-            leading: Icon(Icons.store),
-            title: Text("المتاجر"),
-            onTap: null,
-          ),
-          Divider(
-            height: 0.0,
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text("الإعدادات"),
-            onTap: null,
-          ),
-          Divider(
-            height: 0.0,
-          ),
-          ListTile(
-            leading: Icon(Icons.report_problem),
-            title: Text("بلغ عن مشكلة"),
-            onTap: null,
-          ),
+          Align(
+            alignment: FractionalOffset.bottomCenter,
+            child: Column(
+              children: <Widget>[
+                Divider(
+                  height: 0.0,
+                ),
+                ListTile(
+                  leading: Icon(Icons.report_problem),
+                  title: Text("بلغ عن مشكلة"),
+                  onTap: null,
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
