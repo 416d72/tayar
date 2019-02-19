@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class SideDrawer extends StatelessWidget {
-  final String userName = "عمرو";
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -14,7 +12,13 @@ class SideDrawer extends StatelessWidget {
               children: <Widget>[
                 Icon(Icons.account_circle),
                 FlatButton(
-                  child: Text("تسجيل الدخول"),
+                  child: Text(
+                    "تسجيل الدخول",
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .button,
+                  ),
                   onPressed: () => null,
                 )
               ],
@@ -25,7 +29,13 @@ class SideDrawer extends StatelessWidget {
               children: <Widget>[
                 ListTile(
                   leading: Icon(Icons.favorite),
-                  title: Text("المنتجات المفضلة"),
+                  title: Text(
+                    "المنتجات المفضلة",
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .button,
+                  ),
                   onTap: null,
                 ),
                 Divider(
@@ -33,7 +43,13 @@ class SideDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   leading: Icon(Icons.store),
-                  title: Text("المتاجر"),
+                  title: Text(
+                    "المتاجر",
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .button,
+                  ),
                   onTap: null,
                 ),
                 Divider(
@@ -41,7 +57,13 @@ class SideDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   leading: Icon(Icons.settings),
-                  title: Text("الإعدادات"),
+                  title: Text(
+                    "الإعدادات",
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .button,
+                  ),
                   onTap: null,
                 ),
               ],
@@ -56,7 +78,13 @@ class SideDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   leading: Icon(Icons.report_problem),
-                  title: Text("بلغ عن مشكلة"),
+                  title: Text(
+                    "بلغ عن مشكلة",
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .button,
+                  ),
                   onTap: null,
                 ),
               ],
