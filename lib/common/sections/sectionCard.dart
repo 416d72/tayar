@@ -1,9 +1,22 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:tayar/models/sections.dart';
+
+class SectionBuilder {
+  final String id;
+  final String parent;
+  final String title;
+  final String imageURL;
+
+  const SectionBuilder({
+    this.id,
+    this.parent,
+    this.title,
+    this.imageURL,
+  });
+}
 
 class SectionCard extends StatelessWidget {
-  final Section section;
+  final SectionBuilder section;
 
   SectionCard({@required this.section});
 
