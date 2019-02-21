@@ -2,13 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class SectionBuilder {
-  final String id;
+  final String collection;
   final String parent;
   final String title;
   final String imageURL;
 
   const SectionBuilder({
-    this.id,
+    this.collection,
     this.parent,
     this.title,
     this.imageURL,
@@ -42,7 +42,7 @@ class SectionCard extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: section.imageURL,
                 placeholder: LinearProgressIndicator(),
-                errorWidget: Text("Couldn't load image!"),
+                errorWidget: Text("مشكلة في تحميل الصورة"),
               ),
             ),
             Column(

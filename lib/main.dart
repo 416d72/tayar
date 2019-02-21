@@ -70,20 +70,23 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: _currentPage,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-              ),
-              activeIcon: Icon(
-                Icons.home,
-                color: Theme.of(context).accentColor,
-              ),
-              title: Text(
-                "المنتجات",
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .subhead,
-              )),
+            icon: Icon(
+              Icons.home,
+            ),
+            activeIcon: Icon(
+              Icons.home,
+              color: Theme
+                  .of(context)
+                  .accentColor,
+            ),
+            title: Text(
+              "المنتجات",
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .subhead,
+            ),
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
             title: Text(

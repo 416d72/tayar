@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:tayar/common/sections/sectionCard.dart';
 
 class SectionsPage extends StatefulWidget {
-  final String parent;
+  final String collection;
 
-  const SectionsPage({Key key, @required this.parent}) : super(key: key);
+  const SectionsPage({Key key, @required this.collection}) : super(key: key);
 
   @override
   _SectionsPageBuilder createState() => _SectionsPageBuilder();
@@ -15,7 +15,10 @@ class _SectionsPageBuilder extends State<SectionsPage> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: Firestore.instance.collection('Sections').snapshots(),
+      stream: Firestore.instance
+          .collection(widget.collection)
+          .where('active', isEqualTo: true)
+          .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData)
           return Center(
@@ -27,10 +30,10 @@ class _SectionsPageBuilder extends State<SectionsPage> {
             var section = snapshot.data.documents[index];
             return SectionCard(
               section: SectionBuilder(
-                id: widget.parent,
+                collection: null,
                 parent: null,
-                title: section['details'][0].toString(),
-                imageURL: section['details'][1].toString(),
+                title: section['title'],
+                imageURL: section['image'],
               ),
             );
           }),
