@@ -12,10 +12,7 @@ class _SearchField extends State<SearchFieldWidget> {
     return Container(
 //      alignment: Alignment(0.0, -1.0),
       child: TextFormField(
-        style: Theme
-            .of(context)
-            .textTheme
-            .subhead,
+        style: Theme.of(context).textTheme.subhead,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(0.0),
           labelText: "بتدور على ايه؟",
