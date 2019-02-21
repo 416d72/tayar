@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tayar/common/search.dart';
-import 'package:tayar/common/sideDrawer/sideDrawer.dart';
-import 'package:tayar/common/theme.dart';
-import 'package:tayar/users/client/cartPage.dart';
-import 'package:tayar/users/client/historyPage.dart';
-import 'package:tayar/users/client/mainPage.dart';
+import 'package:tayar/screens/cartPage.dart';
+import 'package:tayar/screens/historyPage.dart';
+import 'package:tayar/screens/index.dart';
+import 'package:tayar/screens/theme.dart';
+import 'package:tayar/widgets/sideDrawer.dart';
+import 'package:tayar/widgets/topBar.dart';
 
 void main() {
   // Force portrait mode
@@ -44,7 +44,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentPage = 0;
-  final List<Widget> _pages = [MainPage(), CartPage(), HistoryPage()];
+  final List<Widget> _pages = [
+    Index(
+      collection: 'Sections',
+    ),
+    CartPage(),
+    HistoryPage()
+  ];
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -55,14 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
 //      key: _scaffoldKey,
-      appBar: AppBar(
-        leading: Builder(
-            builder: (context) => IconButton(
-                  icon: Icon(Icons.dehaze),
-                  onPressed: () => Scaffold.of(context).openDrawer(),
-                )),
-        title: SearchFieldWidget(),
-      ),
+      appBar: topBar(),
       body: _pages[_currentPage],
       drawer: SideDrawer(),
       bottomNavigationBar: BottomNavigationBar(

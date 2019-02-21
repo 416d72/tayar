@@ -14,10 +14,7 @@ class SideDrawer extends StatelessWidget {
                 FlatButton(
                   child: Text(
                     "تسجيل الدخول",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .button,
+                    style: Theme.of(context).textTheme.button,
                   ),
                   onPressed: () => null,
                 )
@@ -31,10 +28,7 @@ class SideDrawer extends StatelessWidget {
                   leading: Icon(Icons.favorite),
                   title: Text(
                     "المنتجات المفضلة",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .button,
+                    style: Theme.of(context).textTheme.button,
                   ),
                   onTap: null,
                 ),
@@ -45,10 +39,7 @@ class SideDrawer extends StatelessWidget {
                   leading: Icon(Icons.store),
                   title: Text(
                     "المتاجر",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .button,
+                    style: Theme.of(context).textTheme.button,
                   ),
                   onTap: null,
                 ),
@@ -59,10 +50,7 @@ class SideDrawer extends StatelessWidget {
                   leading: Icon(Icons.settings),
                   title: Text(
                     "الإعدادات",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .button,
+                    style: Theme.of(context).textTheme.button,
                   ),
                   onTap: null,
                 ),
@@ -80,10 +68,7 @@ class SideDrawer extends StatelessWidget {
                   leading: Icon(Icons.report_problem),
                   title: Text(
                     "بلغ عن مشكلة",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .button,
+                    style: Theme.of(context).textTheme.button,
                   ),
                   onTap: null,
                 ),

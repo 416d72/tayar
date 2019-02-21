@@ -8,6 +8,7 @@ class HistoryPage extends StatefulWidget {
 
 class _History extends State<HistoryPage> {
   var _refreshKey = GlobalKey<RefreshIndicatorState>();
+
   @override
   Widget build(BuildContext context) {
     return LiquidPullToRefresh(

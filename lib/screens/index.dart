@@ -2,16 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class SectionsPage extends StatefulWidget {
+class Index extends StatefulWidget {
   final String collection;
 
-  const SectionsPage({Key key, @required this.collection}) : super(key: key);
+  const Index({Key key, @required this.collection}) : super(key: key);
 
   @override
   _SectionsPageBuilder createState() => _SectionsPageBuilder();
 }
 
-class _SectionsPageBuilder extends State<SectionsPage> {
+class _SectionsPageBuilder extends State<Index> {
   @override
   void initState() {
     super.initState();
@@ -34,45 +34,19 @@ class _SectionsPageBuilder extends State<SectionsPage> {
             crossAxisCount: 2,
             children: List.generate(snapshot.data.documents.length, (index) {
               var section = snapshot.data.documents[index];
-              return SectionCard(
-                section: SectionBuilder(
-                  collection: null,
-                  parent: null,
-                  title: section['title'],
-                  imageURL: section['image'],
-                ),
-              );
+              return cardWidget(
+                  context, null, null, section['title'], section['image']);
             }),
           );
         },
       ),
     );
   }
-}
 
-class SectionBuilder {
-  final String collection;
-  final String parent;
-  final String title;
-  final String imageURL;
-
-  const SectionBuilder({
-    this.collection,
-    this.parent,
-    this.title,
-    this.imageURL,
-  });
-}
-
-class SectionCard extends StatelessWidget {
-  final SectionBuilder section;
-
-  SectionCard({@required this.section});
-
-  @override
-  Widget build(BuildContext context) {
+  Widget cardWidget(BuildContext context, String collection, String parent,
+      String title, String image) {
     return GestureDetector(
-      onTap: () => Scaffold.of(context).dispose(),
+      onTap: () => print('tapped'),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
         child: Stack(
@@ -91,7 +65,7 @@ class SectionCard extends StatelessWidget {
                 ],
               ),
               child: CachedNetworkImage(
-                imageUrl: section.imageURL,
+                imageUrl: image,
                 placeholder: Center(
                   child: CircularProgressIndicator(),
                 ),
@@ -110,7 +84,7 @@ class SectionCard extends StatelessWidget {
                     color: Colors.white,
                   ),
                   child: Text(
-                    section.title,
+                    title,
                     style: Theme
                         .of(context)
                         .textTheme
