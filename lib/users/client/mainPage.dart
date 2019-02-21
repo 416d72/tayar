@@ -10,7 +10,7 @@ class _MainSections extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return SectionsPage(
-      parent: '/',
+      collection: 'Sections',
     );
   }
 }
