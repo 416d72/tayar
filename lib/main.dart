@@ -11,12 +11,10 @@ import 'package:tayar/widgets/topBar.dart';
 void main() {
   // Force portrait mode
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  // Main app
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -44,21 +42,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentPage = 0;
-  final List<Widget> _pages = [
-    Index(
-      collection: 'Sections',
-    ),
-    CartPage(),
-    HistoryPage()
-  ];
+  final List _pages = [Index(), CartPage(), HistoryPage()];
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
 //      key: _scaffoldKey,
       appBar: topBar(),

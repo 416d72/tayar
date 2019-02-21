@@ -3,18 +3,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Index extends StatefulWidget {
-  final String collection;
-
-  const Index({Key key, @required this.collection}) : super(key: key);
+//  final String collection;
+//
+//  const Index({Key key, @required this.collection}) : super(key: key);
 
   @override
   _SectionsPageBuilder createState() => _SectionsPageBuilder();
 }
 
 class _SectionsPageBuilder extends State<Index> {
+  String collection = 'Sections';
+
   @override
   void initState() {
     super.initState();
+    this.collection = 'Sections';
   }
 
   @override
@@ -22,7 +25,7 @@ class _SectionsPageBuilder extends State<Index> {
     return Scaffold(
       body: StreamBuilder(
         stream: Firestore.instance
-            .collection(widget.collection)
+            .collection(this.collection)
             .where('active', isEqualTo: true)
             .snapshots(),
         builder: (context, snapshot) {
@@ -46,7 +49,10 @@ class _SectionsPageBuilder extends State<Index> {
   Widget cardWidget(BuildContext context, String collection, String parent,
       String title, String image) {
     return GestureDetector(
-      onTap: () => print('tapped'),
+      onTap: () =>
+          setState(() {
+            this.collection = 'test';
+          }),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
         child: Stack(
