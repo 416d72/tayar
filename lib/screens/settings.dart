@@ -9,7 +9,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
+    return CustomScaffoldFull(
       body: Center(
         child: Text('Settings Page'),
       ),

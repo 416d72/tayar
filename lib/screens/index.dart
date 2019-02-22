@@ -61,9 +61,7 @@ class _SectionsPageBuilder extends State<Index> {
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
-                    color: Theme
-                        .of(context)
-                        .accentColor,
+                    color: Theme.of(context).accentColor,
                     blurRadius: 1.0,
                     spreadRadius: 0.0,
                   ),
@@ -90,10 +88,7 @@ class _SectionsPageBuilder extends State<Index> {
                   ),
                   child: Text(
                     title,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .subhead,
+                    style: Theme.of(context).textTheme.subhead,
                   ),
                 ),
               ],
