@@ -30,7 +30,10 @@ class MyApp extends StatelessWidget {
       locale: Locale("ar", "EG"),
       title: 'Tayar',
       theme: customTheme(),
-      home: MyHomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MyHomePage(),
+      },
     );
   }
 }
