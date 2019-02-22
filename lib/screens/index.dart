@@ -1,8 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:tayar/widgets/sideDrawer.dart';
-import 'package:tayar/widgets/topBar.dart';
+import 'package:tayar/widgets/scaffold.dart';
 
 class Index extends StatefulWidget {
 //  final String collection;
@@ -20,9 +19,7 @@ class _SectionsPageBuilder extends State<Index> {
       .snapshots();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: topBar(),
-      drawer: SideDrawer(),
+    return CustomScaffold(
       body: StreamBuilder(
         stream: _stream,
         builder: (context, snapshot) {

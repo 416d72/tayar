@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tayar/widgets/search.dart';
 
-Widget topBar() {
+Widget topBar(context) {
   return AppBar(
     leading: Builder(
         builder: (context) => IconButton(
@@ -10,12 +10,12 @@ Widget topBar() {
             )),
     title: SearchFieldWidget(),
     actions: <Widget>[
-//      FlatButton(
-//        onPressed: () {
-//          Navigator.pushNamed(context, '/cart');
-//        },
-//        child: Icon(Icons.shopping_cart),
-//      )
+      FlatButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/cart');
+        },
+        child: Icon(Icons.shopping_cart),
+      )
     ],
   );
 }
