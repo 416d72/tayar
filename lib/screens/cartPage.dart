@@ -15,6 +15,6 @@ class _CartWidget extends StatefulWidget {
 class _Cart extends State<_CartWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(child: Center(child: Text("سلة المشتريات")));
+    return Container(child: Center(child: Text("Coming soon ...")));
   }
 }

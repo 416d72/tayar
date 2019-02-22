@@ -1,33 +1,30 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:tayar/widgets/sideDrawer.dart';
+import 'package:tayar/widgets/topBar.dart';
 
 class Index extends StatefulWidget {
 //  final String collection;
 //
 //  const Index({Key key, @required this.collection}) : super(key: key);
-
   @override
   _SectionsPageBuilder createState() => _SectionsPageBuilder();
 }
 
 class _SectionsPageBuilder extends State<Index> {
-  String collection = 'Sections';
-
-  @override
-  void initState() {
-    super.initState();
-    this.collection = 'Sections';
-  }
-
+  Stream _stream = Firestore.instance
+      .collection('Sections')
+      .where('active', isEqualTo: true)
+      .where('parent', isEqualTo: '/')
+      .snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: topBar(context),
+      drawer: SideDrawer(),
       body: StreamBuilder(
-        stream: Firestore.instance
-            .collection(this.collection)
-            .where('active', isEqualTo: true)
-            .snapshots(),
+        stream: _stream,
         builder: (context, snapshot) {
           if (!snapshot.hasData)
             return Center(
@@ -37,8 +34,8 @@ class _SectionsPageBuilder extends State<Index> {
             crossAxisCount: 2,
             children: List.generate(snapshot.data.documents.length, (index) {
               var section = snapshot.data.documents[index];
-              return cardWidget(
-                  context, null, null, section['title'], section['image']);
+              return sectionCard(context, section.reference.documentID,
+                  section['title'], section['image'], section['child']);
             }),
           );
         },
@@ -46,13 +43,18 @@ class _SectionsPageBuilder extends State<Index> {
     );
   }
 
-  Widget cardWidget(BuildContext context, String collection, String parent,
-      String title, String image) {
+  Widget sectionCard(BuildContext context, String parent, String title,
+      String image, String child) {
     return GestureDetector(
-      onTap: () =>
-          setState(() {
-            this.collection = 'test';
-          }),
+      onTap: () {
+        setState(() {
+          _stream = Firestore.instance
+              .collection(child)
+              .where('active', isEqualTo: true)
+              .where('parent', isEqualTo: '$parent')
+              .snapshots();
+        });
+      },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
         child: Stack(
@@ -75,7 +77,7 @@ class _SectionsPageBuilder extends State<Index> {
                 placeholder: Center(
                   child: CircularProgressIndicator(),
                 ),
-                errorWidget: Text("مشكلة في تحميل الصورة"),
+                errorWidget: Text("Error loading image"),
               ),
             ),
             Column(
