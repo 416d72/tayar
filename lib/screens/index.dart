@@ -21,7 +21,7 @@ class _SectionsPageBuilder extends State<Index> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: topBar(context),
+      appBar: topBar(),
       drawer: SideDrawer(),
       body: StreamBuilder(
         stream: _stream,
