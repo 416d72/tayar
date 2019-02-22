@@ -59,7 +59,7 @@ Widget topBar(context, bool drawer) {
         );
       }
     }),
-    title: SearchFieldWidget(),
+    title: _topSearchBarDeterminer(drawer),
     actions: <Widget>[
       FlatButton(
         onPressed: () {
@@ -69,4 +69,12 @@ Widget topBar(context, bool drawer) {
       )
     ],
   );
+}
+
+_topSearchBarDeterminer(bool activate) {
+  if (activate == true) {
+    return SearchFieldWidget();
+  } else {
+    return null;
+  }
 }

@@ -8,7 +8,6 @@ class SideDrawer extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             child: Column(
-              // TODO Username, User avatar
               children: <Widget>[
                 Icon(Icons.account_circle),
                 SizedBox(height: 10.0),
