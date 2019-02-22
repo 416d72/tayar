@@ -9,7 +9,7 @@ class AboutPage extends StatefulWidget {
 class _AboutState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
+    return CustomScaffoldFull(
       body: Center(
         child: Text('About Page'),
       ),

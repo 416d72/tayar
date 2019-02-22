@@ -29,7 +29,8 @@ class SideDrawer extends StatelessWidget {
                         .button,
                   ),
                   onTap: () {
-                    Navigator.popAndPushNamed(context, '/');
+                    Navigator.pop(context);
+                    Navigator.pushReplacementNamed(context, '/');
                   },
                 ),
                 Divider(
@@ -45,7 +46,8 @@ class SideDrawer extends StatelessWidget {
                         .button,
                   ),
                   onTap: () {
-                    Navigator.popAndPushNamed(context, '/vendors');
+                    Navigator.pop(context);
+                    Navigator.pushReplacementNamed(context, '/vendors');
                   },
                 ),
                 Divider(
@@ -58,7 +60,8 @@ class SideDrawer extends StatelessWidget {
                     style: Theme.of(context).textTheme.button,
                   ),
                   onTap: () {
-                    Navigator.popAndPushNamed(context, '/favourites');
+                    Navigator.pop(context);
+                    Navigator.pushReplacementNamed(context, '/favourites');
                   },
                 ),
                 Divider(
@@ -71,7 +74,8 @@ class SideDrawer extends StatelessWidget {
                     style: Theme.of(context).textTheme.button,
                   ),
                   onTap: () {
-                    Navigator.popAndPushNamed(context, '/history');
+                    Navigator.pop(context);
+                    Navigator.pushReplacementNamed(context, '/history');
                   },
                 ),
               ],
@@ -94,7 +98,7 @@ class SideDrawer extends StatelessWidget {
                         .button,
                   ),
                   onTap: () {
-                    Navigator.popAndPushNamed(context, '/settings');
+                    Navigator.pushNamed(context, '/settings');
                   },
                 ),
                 Divider(
@@ -110,7 +114,7 @@ class SideDrawer extends StatelessWidget {
                         .button,
                   ),
                   onTap: () {
-                    Navigator.popAndPushNamed(context, '/about');
+                    Navigator.pushNamed(context, '/about');
                   },
                 ),
                 Divider(
@@ -123,7 +127,7 @@ class SideDrawer extends StatelessWidget {
                     style: Theme.of(context).textTheme.button,
                   ),
                   onTap: () {
-                    Navigator.popAndPushNamed(context, '/contact');
+                    Navigator.pushNamed(context, '/contact');
                   },
                 ),
               ],
