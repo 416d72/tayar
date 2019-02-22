@@ -19,6 +19,23 @@ class SideDrawer extends StatelessWidget {
             child: ListView(
               children: <Widget>[
                 ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text(
+                    "Home",
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .button,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushReplacementNamed(context, '/');
+                  },
+                ),
+                Divider(
+                  height: 0.0,
+                ),
+                ListTile(
                   leading: Icon(Icons.explore),
                   title: Text(
                     "Products",
@@ -29,7 +46,7 @@ class SideDrawer extends StatelessWidget {
                   ),
                   onTap: () {
                     Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, '/');
+                    Navigator.pushReplacementNamed(context, '/sections');
                   },
                 ),
                 Divider(

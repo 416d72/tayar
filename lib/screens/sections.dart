@@ -3,10 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tayar/widgets/scaffold.dart';
 
-class Index extends StatefulWidget {
-  /* This is the main page which contains top deals, best selling products...etc
-  *
-  * */
+class SectionsPage extends StatefulWidget {
 //  final String collection;
 //
 //  const Index({Key key, @required this.collection}) : super(key: key);
@@ -14,12 +11,13 @@ class Index extends StatefulWidget {
   _SectionsPageBuilder createState() => _SectionsPageBuilder();
 }
 
-class _SectionsPageBuilder extends State<Index> {
+class _SectionsPageBuilder extends State<SectionsPage> {
   Stream _stream = Firestore.instance
       .collection('Sections')
       .where('active', isEqualTo: true)
       .where('parent', isEqualTo: '/')
       .snapshots();
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
