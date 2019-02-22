@@ -1,14 +1,8 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tayar/screens/about.dart';
-import 'package:tayar/screens/cart.dart';
-import 'package:tayar/screens/contact.dart';
-import 'package:tayar/screens/favourites.dart';
-import 'package:tayar/screens/history.dart';
-import 'package:tayar/screens/index.dart';
-import 'package:tayar/screens/login.dart';
-import 'package:tayar/screens/settings.dart';
-import 'package:tayar/screens/vendors.dart';
+import 'package:tayar/app.dart';
+import 'package:tayar/routes.dart';
 import 'package:tayar/theme.dart';
 
 void main() {
@@ -17,7 +11,20 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
+  MyAppState() {
+    final router = new Router();
+    Routes.configureRoutes(router);
+    App.router = router;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,18 +40,20 @@ class MyApp extends StatelessWidget {
 //      locale: Locale("ar", "EG"),
       title: 'Tayar',
       theme: customTheme(),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => Index(),
-        '/login': (context) => LoginPage(),
-        '/cart': (context) => CartPage(),
-        '/vendors': (context) => VendorsPage(),
-        '/favourites': (context) => FavouritesPage(),
-        '/history': (context) => HistoryPage(),
-        '/settings': (context) => SettingsPage(),
-        '/about': (context) => AboutPage(),
-        '/contact': (context) => ContactPage(),
-      },
+      onGenerateRoute: App.router.generator,
+//      initialRoute: '/',
+//      routes: {
+//        '/': (context) => Index(),
+//        '/sections': (context) => SectionsPage(),
+//        '/login': (context) => LoginPage(),
+//        '/cart': (context) => CartPage(),
+//        '/vendors': (context) => VendorsPage(),
+//        '/favourites': (context) => FavouritesPage(),
+//        '/history': (context) => HistoryPage(),
+//        '/settings': (context) => SettingsPage(),
+//        '/about': (context) => AboutPage(),
+//        '/contact': (context) => ContactPage(),
+//      },
     );
   }
 }
