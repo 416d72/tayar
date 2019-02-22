@@ -16,8 +16,10 @@ class _History extends State<HistoryPage> {
       child: ListView(
         padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
         children: <Widget>[
-          Center(
-            child: Text("الطلبات السابقة"),
+          Container(
+            child: Center(
+              child: Text("Coming soon ..."),
+            ),
           ),
         ],
       ),

@@ -13,10 +13,13 @@ class SideDrawer extends StatelessWidget {
                 Icon(Icons.account_circle),
                 FlatButton(
                   child: Text(
-                    "تسجيل الدخول",
+                    "Login",
                     style: Theme.of(context).textTheme.button,
                   ),
-                  onPressed: () => null,
+                  onPressed: () =>
+                      () {
+                    Navigator.pushNamed(context, '/login');
+                  },
                 )
               ],
             ),
@@ -25,12 +28,17 @@ class SideDrawer extends StatelessWidget {
             child: ListView(
               children: <Widget>[
                 ListTile(
-                  leading: Icon(Icons.favorite),
+                  leading: Icon(Icons.home),
                   title: Text(
-                    "المنتجات المفضلة",
-                    style: Theme.of(context).textTheme.button,
+                    "Products",
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .button,
                   ),
-                  onTap: null,
+                  onTap: () {
+                    Navigator.pushNamed(context, '/');
+                  },
                 ),
                 Divider(
                   height: 0.0,
@@ -38,21 +46,41 @@ class SideDrawer extends StatelessWidget {
                 ListTile(
                   leading: Icon(Icons.store),
                   title: Text(
-                    "المتاجر",
-                    style: Theme.of(context).textTheme.button,
+                    "Vendors",
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .button,
                   ),
-                  onTap: null,
+                  onTap: () {
+                    Navigator.pushNamed(context, '/vendors');
+                  },
                 ),
                 Divider(
                   height: 0.0,
                 ),
                 ListTile(
-                  leading: Icon(Icons.settings),
+                  leading: Icon(Icons.favorite),
                   title: Text(
-                    "الإعدادات",
+                    "Favourites",
                     style: Theme.of(context).textTheme.button,
                   ),
-                  onTap: null,
+                  onTap: () {
+                    Navigator.pushNamed(context, '/favourites');
+                  },
+                ),
+                Divider(
+                  height: 0.0,
+                ),
+                ListTile(
+                  leading: Icon(Icons.history),
+                  title: Text(
+                    "History",
+                    style: Theme.of(context).textTheme.button,
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/history');
+                  },
                 ),
               ],
             ),
@@ -65,12 +93,46 @@ class SideDrawer extends StatelessWidget {
                   height: 0.0,
                 ),
                 ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text(
+                    "Settings",
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .button,
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/settings');
+                  },
+                ),
+                Divider(
+                  height: 0.0,
+                ),
+                ListTile(
+                  leading: Icon(Icons.info),
+                  title: Text(
+                    "About",
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .button,
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/');
+                  },
+                ),
+                Divider(
+                  height: 0.0,
+                ),
+                ListTile(
                   leading: Icon(Icons.report_problem),
                   title: Text(
-                    "بلغ عن مشكلة",
+                    "Report bug",
                     style: Theme.of(context).textTheme.button,
                   ),
-                  onTap: null,
+                  onTap: () {
+                    Navigator.pushNamed(context, '/');
+                  },
                 ),
               ],
             ),

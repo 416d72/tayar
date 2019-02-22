@@ -15,7 +15,7 @@ class _SearchField extends State<SearchFieldWidget> {
         style: Theme.of(context).textTheme.subhead,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(0.0),
-          labelText: "بتدور على ايه؟",
+          labelText: "What are you looking for?",
         ),
       ),
     );
