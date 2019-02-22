@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:tayar/widgets/scaffold.dart';
 
 class HistoryPage extends StatefulWidget {
   @override
@@ -11,20 +12,22 @@ class _History extends State<HistoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return LiquidPullToRefresh(
-      key: _refreshKey,
-      child: ListView(
-        padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
-        children: <Widget>[
-          Container(
-            child: Center(
-              child: Text("Coming soon ..."),
+    return CustomScaffold(
+      body: LiquidPullToRefresh(
+        key: _refreshKey,
+        child: ListView(
+          padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
+          children: <Widget>[
+            Container(
+              child: Center(
+                child: Text("Coming soon ..."),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
+        onRefresh: _refresh,
+        showChildOpacityTransition: true,
       ),
-      onRefresh: _refresh,
-      showChildOpacityTransition: true,
     );
   }
 

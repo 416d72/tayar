@@ -11,16 +11,8 @@ class SideDrawer extends StatelessWidget {
               // TODO Username, User avatar
               children: <Widget>[
                 Icon(Icons.account_circle),
-                FlatButton(
-                  child: Text(
-                    "Login",
-                    style: Theme.of(context).textTheme.button,
-                  ),
-                  onPressed: () =>
-                      () {
-                    Navigator.pushNamed(context, '/login');
-                  },
-                )
+                SizedBox(height: 10.0),
+                Text('Login/Sign up'),
               ],
             ),
           ),
@@ -28,7 +20,7 @@ class SideDrawer extends StatelessWidget {
             child: ListView(
               children: <Widget>[
                 ListTile(
-                  leading: Icon(Icons.home),
+                  leading: Icon(Icons.explore),
                   title: Text(
                     "Products",
                     style: Theme
@@ -37,7 +29,7 @@ class SideDrawer extends StatelessWidget {
                         .button,
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/');
+                    Navigator.popAndPushNamed(context, '/');
                   },
                 ),
                 Divider(
@@ -53,7 +45,7 @@ class SideDrawer extends StatelessWidget {
                         .button,
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/vendors');
+                    Navigator.popAndPushNamed(context, '/vendors');
                   },
                 ),
                 Divider(
@@ -66,7 +58,7 @@ class SideDrawer extends StatelessWidget {
                     style: Theme.of(context).textTheme.button,
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/favourites');
+                    Navigator.popAndPushNamed(context, '/favourites');
                   },
                 ),
                 Divider(
@@ -79,7 +71,7 @@ class SideDrawer extends StatelessWidget {
                     style: Theme.of(context).textTheme.button,
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/history');
+                    Navigator.popAndPushNamed(context, '/history');
                   },
                 ),
               ],
@@ -102,7 +94,7 @@ class SideDrawer extends StatelessWidget {
                         .button,
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/settings');
+                    Navigator.popAndPushNamed(context, '/settings');
                   },
                 ),
                 Divider(
@@ -118,7 +110,7 @@ class SideDrawer extends StatelessWidget {
                         .button,
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/');
+                    Navigator.popAndPushNamed(context, '/about');
                   },
                 ),
                 Divider(
@@ -131,7 +123,7 @@ class SideDrawer extends StatelessWidget {
                     style: Theme.of(context).textTheme.button,
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/');
+                    Navigator.popAndPushNamed(context, '/contact');
                   },
                 ),
               ],

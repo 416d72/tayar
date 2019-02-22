@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tayar/screens/cartPage.dart';
-import 'package:tayar/screens/historyPage.dart';
+import 'package:tayar/screens/about.dart';
+import 'package:tayar/screens/cart.dart';
+import 'package:tayar/screens/contact.dart';
+import 'package:tayar/screens/favourites.dart';
+import 'package:tayar/screens/history.dart';
 import 'package:tayar/screens/index.dart';
-import 'package:tayar/screens/theme.dart';
+import 'package:tayar/screens/login.dart';
+import 'package:tayar/screens/settings.dart';
+import 'package:tayar/screens/vendors.dart';
+import 'package:tayar/theme.dart';
 
 void main() {
   // Force portrait mode
@@ -29,15 +35,15 @@ class MyApp extends StatelessWidget {
       theme: customTheme(),
       initialRoute: '/',
       routes: {
-        '/login': (context) => null,
-        '/cart': (context) => CartPage(),
         '/': (context) => Index(),
-        '/vendors': (context) => null,
-        '/favourites': (context) => null,
+        '/login': (context) => LoginPage(),
+        '/cart': (context) => CartPage(),
+        '/vendors': (context) => VendorsPage(),
+        '/favourites': (context) => FavouritesPage(),
         '/history': (context) => HistoryPage(),
-        '/settings': (context) => null,
-        '/contact': (context) => null,
-        '/about': (context) => null,
+        '/settings': (context) => SettingsPage(),
+        '/about': (context) => AboutPage(),
+        '/contact': (context) => ContactPage(),
       },
     );
   }

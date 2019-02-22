@@ -2,10 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:tayar/widgets/sideDrawer.dart';
 import 'package:tayar/widgets/topBar.dart';
 
-class CustomScaffold extends Scaffold {
-  @override
-  Widget get drawer => SideDrawer();
+class CustomScaffold extends StatefulWidget {
+  final Widget body;
 
+  CustomScaffold({@required this.body});
   @override
-  PreferredSizeWidget get appBar => topBar();
+  _CustomScaffoldState createState() => _CustomScaffoldState();
+}
+
+class _CustomScaffoldState extends State<CustomScaffold> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: topBar(context),
+      drawer: SideDrawer(),
+      body: widget.body,
+    );
+  }
 }
