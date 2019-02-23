@@ -10,6 +10,7 @@ class _LoginState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      title: 'Login/Signup',
       body: Center(
         child: Text('Login here'),
       ),

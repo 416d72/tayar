@@ -10,6 +10,7 @@ class _VendorsState extends State<VendorsPage> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      title: 'Vendors',
       body: Center(
         child: Text('Vendors List'),
       ),
