@@ -16,20 +16,25 @@ transitionDirection() {
 ThemeData customTheme() {
   TextTheme _buildTextTheme(TextTheme base) {
     return base.copyWith(
-      headline: base.headline.copyWith(
-        fontFamily: 'Frutiger',
-      ),
-      title: base.title.copyWith(
-        fontFamily: 'Frutiger',
-      ),
-      button: base.title.copyWith(
-        fontFamily: 'Frutiger',
-      ),
-      subhead: base.title.copyWith(
-        fontFamily: 'Frutiger',
-        fontSize: 16.0,
-      ),
-    );
+        headline: base.headline.copyWith(
+          fontFamily: 'Frutiger',
+        ),
+        title: base.title.copyWith(
+          fontFamily: 'Frutiger',
+        ),
+        button: base.button.copyWith(
+          fontFamily: 'Frutiger',
+        ),
+        subhead: base.subhead.copyWith(
+          fontFamily: 'Frutiger',
+          fontSize: 13,
+        ),
+        display1: base.display1.copyWith(
+          fontFamily: 'Frutiger',
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+        ));
   }
 
   final ThemeData base = ThemeData.light();
@@ -51,21 +56,4 @@ cardShadow(context) {
       ),
     ],
   );
-}
-
-class TriangleTag extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    // TODO: adjust rotation based on application's language
-    var path = Path();
-    path.lineTo(size.width, size.height);
-    path.lineTo(size.width, 0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false;
-  }
 }

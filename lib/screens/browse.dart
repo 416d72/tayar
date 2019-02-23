@@ -58,30 +58,15 @@ class _BrowsePageState extends State<BrowsePage> {
                 return sectionCard(context, id, document['title'],
                     document['image'], document['child']);
               } else {
-                int discount = _discountCalculator(
-                    document['price-before'].toDouble(),
-                    document['price-after'].toDouble());
-                return productCard(
-                    context,
-                    id,
-                    document['title'],
-                    document['image'],
-                    document['price-after'].toDouble(),
-                    discount);
+                double lowestPrice = 1.99;
+                return productCard(context, id, document['title'],
+                    document['image'], lowestPrice);
               }
             }),
           );
         },
       ),
     );
-  }
-
-  int _discountCalculator(double priceBefore, double priceAfter) {
-    if (priceBefore > priceAfter) {
-      return (((priceBefore - priceAfter) / priceBefore) * 100).ceil();
-    } else {
-      return 0;
-    }
   }
 
   Widget sectionCard(BuildContext context, String documentID, String title,
@@ -130,10 +115,8 @@ class _BrowsePageState extends State<BrowsePage> {
   }
 
   Widget productCard(BuildContext context, String documentID, String title,
-      String image, double price, int discount) {
+      String image, double price) {
     return Container(
-      padding: EdgeInsets.all(0),
-      alignment: Alignment(0, 0),
       decoration: cardShadow(context),
       child: Stack(
         children: <Widget>[
@@ -149,47 +132,37 @@ class _BrowsePageState extends State<BrowsePage> {
               ),
             ),
           ),
-          Row(
+          Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              Stack(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Container(
-                    width: 60,
-                    height: 60,
-                    child: ClipPath(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Theme
-                              .of(context)
-                              .accentColor,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black,
-                              spreadRadius: 0,
-                              blurRadius: 1,
-                            )
-                          ],
-                        ),
-                      ),
-                      clipper: TriangleTag(),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
-                    child: Transform.rotate(
-                      angle: 0.785398,
-                      child: Text(
-                        " - $discount%",
-                        style: TextStyle(color: Colors.black),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
+                  Text(
+                    title,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .subhead,
+                    softWrap: true,
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "$price EGP",
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .display1,
+                    softWrap: true,
                   )
                 ],
               ),
             ],
-          )
+          ),
         ],
       ),
     );
