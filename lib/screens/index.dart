@@ -24,6 +24,7 @@ class _SectionsPageBuilder extends State<Index> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      searchBar: true,
       body: StreamBuilder(
         stream: _stream,
         builder: (context, snapshot) {
