@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tayar/app.dart';
 import 'package:tayar/routing/routes.dart';
-import 'package:tayar/theme.dart';
 
 void main() {
   // Force portrait mode
