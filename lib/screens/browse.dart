@@ -3,26 +3,28 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tayar/widgets/scaffold.dart';
 
-class SectionsPage extends StatefulWidget {
-//  final String collection;
-//
-//  const Index({Key key, @required this.collection}) : super(key: key);
+class BrowsePage extends StatefulWidget {
+  final String collection;
+  final String parent;
+
+  const BrowsePage({Key key, @required this.collection, @required this.parent})
+      : super(key: key);
   @override
-  _SectionsPageBuilder createState() => _SectionsPageBuilder();
+  State<StatefulWidget> createState() {
+    return _BrowsePageState();
+  }
 }
 
-class _SectionsPageBuilder extends State<SectionsPage> {
-  Stream _stream = Firestore.instance
-      .collection('Sections')
-      .where('active', isEqualTo: true)
-      .where('parent', isEqualTo: '/')
-      .snapshots();
-
+class _BrowsePageState extends State<BrowsePage> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       body: StreamBuilder(
-        stream: _stream,
+        stream: Firestore.instance
+            .collection(widget.collection)
+            .where('active', isEqualTo: true)
+            .where('parent', isEqualTo: widget.parent)
+            .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData)
             return Center(
@@ -54,7 +56,17 @@ class _SectionsPageBuilder extends State<SectionsPage> {
 //        });
 //      },
       onTap: () {
-        print('tapped');
+        return showDialog(
+            context: context,
+            child: AlertDialog(
+              content: Text("Products of $title"),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text('Close'),
+                )
+              ],
+            ));
       },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),

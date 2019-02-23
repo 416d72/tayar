@@ -4,7 +4,8 @@ import 'package:tayar/routing/handlers.dart';
 
 class Routes {
   static String root = "/";
-  static String sections = "/sections";
+  static String browse = "/browse";
+  static String fancyBrowse = "/browse/fancy";
   static String about = "/about";
   static String cart = "/cart";
   static String contact = "/contact";
@@ -20,7 +21,7 @@ class Routes {
       print("ROUTE WAS NOT FOUND !!!");
     });
     router.define(root, handler: indexHandler);
-    router.define(sections, handler: sectionsHandler);
+    router.define(browse, handler: browseHandler);
     router.define(about, handler: aboutHandler);
     router.define(cart, handler: cartHandler);
     router.define(contact, handler: contactHandler);
