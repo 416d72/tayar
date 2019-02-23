@@ -58,10 +58,16 @@ class _BrowsePageState extends State<BrowsePage> {
                 return sectionCard(context, id, document['title'],
                     document['image'], document['child']);
               } else {
-                int discount = discountCalculator(
-                    document['price-before'], document['price-after']);
+                int discount = _discountCalculator(
+                    document['price-before'].toDouble(),
+                    document['price-after'].toDouble());
                 return productCard(
-                    context, id, document['title'], document['image']);
+                    context,
+                    id,
+                    document['title'],
+                    document['image'],
+                    document['price-after'].toDouble(),
+                    discount);
               }
             }),
           );
@@ -70,9 +76,9 @@ class _BrowsePageState extends State<BrowsePage> {
     );
   }
 
-  int discountCalculator(double priceBefore, double priceAfter) {
+  int _discountCalculator(double priceBefore, double priceAfter) {
     if (priceBefore > priceAfter) {
-      return ((priceBefore - priceAfter) / priceBefore).ceil();
+      return (((priceBefore - priceAfter) / priceBefore) * 100).ceil();
     } else {
       return 0;
     }
@@ -90,16 +96,7 @@ class _BrowsePageState extends State<BrowsePage> {
         child: Stack(
           children: <Widget>[
             Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Theme.of(context).accentColor,
-                    blurRadius: 1.0,
-                    spreadRadius: 0.0,
-                  ),
-                ],
-              ),
+              decoration: cardShadow(context),
               child: CachedNetworkImage(
                 imageUrl: image,
                 placeholder: Center(
@@ -133,28 +130,16 @@ class _BrowsePageState extends State<BrowsePage> {
   }
 
   Widget productCard(BuildContext context, String documentID, String title,
-      String image) {
-    return GestureDetector(
-      onTap: () {
-        print(documentID);
-      },
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
-        child: Stack(
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Theme
-                        .of(context)
-                        .accentColor,
-                    blurRadius: 1.0,
-                    spreadRadius: 0.0,
-                  ),
-                ],
-              ),
+      String image, double price, int discount) {
+    return Container(
+      padding: EdgeInsets.all(0),
+      alignment: Alignment(0, 0),
+      decoration: cardShadow(context),
+      child: Stack(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 70),
+            child: Center(
               child: CachedNetworkImage(
                 imageUrl: image,
                 placeholder: Center(
@@ -163,29 +148,49 @@ class _BrowsePageState extends State<BrowsePage> {
                 errorWidget: Text("Error loading image"),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Container(
-                  alignment: AlignmentDirectional.bottomCenter,
-                  height: 30.0,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Stack(
+                children: <Widget>[
+                  Container(
+                    width: 60,
+                    height: 60,
+                    child: ClipPath(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Theme
+                              .of(context)
+                              .accentColor,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black,
+                              spreadRadius: 0,
+                              blurRadius: 1,
+                            )
+                          ],
+                        ),
+                      ),
+                      clipper: TriangleTag(),
+                    ),
                   ),
-                  child: Text(
-                    title,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .subhead,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
+                    child: Transform.rotate(
+                      angle: 0.785398,
+                      child: Text(
+                        " - $discount%",
+                        style: TextStyle(color: Colors.black),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ],
+          )
+        ],
       ),
     );
   }

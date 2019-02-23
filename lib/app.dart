@@ -5,6 +5,13 @@ class App {
   static Router router;
 }
 
+transitionDirection() {
+  /*
+  Determine what direction should transitions follow based on application's language
+   */
+  return TransitionType.inFromRight;
+}
+
 // Theme
 ThemeData customTheme() {
   TextTheme _buildTextTheme(TextTheme base) {
@@ -33,9 +40,32 @@ ThemeData customTheme() {
   );
 }
 
-transitionDirection() {
-  /*
-  Determine what direction should transitions follow based on application's language
-   */
-  return TransitionType.inFromRight;
+cardShadow(context) {
+  return BoxDecoration(
+    color: Colors.white,
+    boxShadow: [
+      BoxShadow(
+        color: Colors.orangeAccent,
+        blurRadius: 1.0,
+        spreadRadius: 0.0,
+      ),
+    ],
+  );
+}
+
+class TriangleTag extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    // TODO: adjust rotation based on application's language
+    var path = Path();
+    path.lineTo(size.width, size.height);
+    path.lineTo(size.width, 0);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
+  }
 }
