@@ -44,14 +44,17 @@ class _SectionsPageBuilder extends State<SectionsPage> {
   Widget sectionCard(BuildContext context, String parent, String title,
       String image, String child) {
     return GestureDetector(
+//      onTap: () {
+//        setState(() {
+//          _stream = Firestore.instance
+//              .collection(child)
+//              .where('active', isEqualTo: true)
+//              .where('parent', isEqualTo: '$parent')
+//              .snapshots();
+//        });
+//      },
       onTap: () {
-        setState(() {
-          _stream = Firestore.instance
-              .collection(child)
-              .where('active', isEqualTo: true)
-              .where('parent', isEqualTo: '$parent')
-              .snapshots();
-        });
+        print('tapped');
       },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),

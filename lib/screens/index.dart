@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:tayar/app.dart';
 import 'package:tayar/widgets/scaffold.dart';
 
 class Index extends StatefulWidget {
@@ -46,14 +47,17 @@ class _SectionsPageBuilder extends State<Index> {
   Widget sectionCard(BuildContext context, String parent, String title,
       String image, String child) {
     return GestureDetector(
+//      onTap: () {
+//        setState(() {
+//          _stream = Firestore.instance
+//              .collection(child)
+//              .where('active', isEqualTo: true)
+//              .where('parent', isEqualTo: '$parent')
+//              .snapshots();
+//        });
+//      },
       onTap: () {
-        setState(() {
-          _stream = Firestore.instance
-              .collection(child)
-              .where('active', isEqualTo: true)
-              .where('parent', isEqualTo: '$parent')
-              .snapshots();
-        });
+        App.router.navigateTo(context, '/sections?collection=Sections');
       },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),

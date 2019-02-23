@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tayar/app.dart';
 
 class SideDrawer extends StatelessWidget {
   @override
@@ -28,8 +29,9 @@ class SideDrawer extends StatelessWidget {
                         .button,
                   ),
                   onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, '/');
+                    App.router.pop(context);
+                    App.router.navigateTo(context, '/',
+                        transition: transitionDirection());
                   },
                 ),
                 Divider(
@@ -45,8 +47,9 @@ class SideDrawer extends StatelessWidget {
                         .button,
                   ),
                   onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, '/sections');
+                    App.router.pop(context);
+                    App.router.navigateTo(context, '/',
+                        transition: transitionDirection());
                   },
                 ),
                 Divider(
@@ -62,8 +65,9 @@ class SideDrawer extends StatelessWidget {
                         .button,
                   ),
                   onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, '/vendors');
+                    App.router.pop(context);
+                    App.router.navigateTo(context, '/',
+                        transition: transitionDirection());
                   },
                 ),
                 Divider(
@@ -76,8 +80,9 @@ class SideDrawer extends StatelessWidget {
                     style: Theme.of(context).textTheme.button,
                   ),
                   onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, '/favourites');
+                    App.router.pop(context);
+                    App.router.navigateTo(context, '/',
+                        transition: transitionDirection());
                   },
                 ),
                 Divider(
@@ -90,8 +95,9 @@ class SideDrawer extends StatelessWidget {
                     style: Theme.of(context).textTheme.button,
                   ),
                   onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, '/history');
+                    App.router.pop(context);
+                    App.router.navigateTo(context, '/',
+                        transition: transitionDirection());
                   },
                 ),
               ],
@@ -114,7 +120,8 @@ class SideDrawer extends StatelessWidget {
                         .button,
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/settings');
+                    App.router.navigateTo(context, '/settings',
+                        transition: transitionDirection());
                   },
                 ),
                 Divider(
@@ -130,20 +137,22 @@ class SideDrawer extends StatelessWidget {
                         .button,
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/about');
+                    App.router.navigateTo(context, '/about',
+                        transition: transitionDirection());
                   },
                 ),
                 Divider(
                   height: 0.0,
                 ),
                 ListTile(
-                  leading: Icon(Icons.report_problem),
+                  leading: Icon(Icons.call),
                   title: Text(
-                    "Report bug",
+                    "Contact us",
                     style: Theme.of(context).textTheme.button,
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/contact');
+                    App.router.navigateTo(context, '/contact',
+                        transition: transitionDirection());
                   },
                 ),
               ],

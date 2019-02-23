@@ -2,7 +2,7 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tayar/app.dart';
-import 'package:tayar/routes.dart';
+import 'package:tayar/routing/routes.dart';
 import 'package:tayar/theme.dart';
 
 void main() {
@@ -41,19 +41,6 @@ class MyAppState extends State<MyApp> {
       title: 'Tayar',
       theme: customTheme(),
       onGenerateRoute: App.router.generator,
-//      initialRoute: '/',
-//      routes: {
-//        '/': (context) => Index(),
-//        '/sections': (context) => SectionsPage(),
-//        '/login': (context) => LoginPage(),
-//        '/cart': (context) => CartPage(),
-//        '/vendors': (context) => VendorsPage(),
-//        '/favourites': (context) => FavouritesPage(),
-//        '/history': (context) => HistoryPage(),
-//        '/settings': (context) => SettingsPage(),
-//        '/about': (context) => AboutPage(),
-//        '/contact': (context) => ContactPage(),
-//      },
     );
   }
 }
