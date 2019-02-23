@@ -38,24 +38,6 @@ class SideDrawer extends StatelessWidget {
                   height: 0.0,
                 ),
                 ListTile(
-                  leading: Icon(Icons.explore),
-                  title: Text(
-                    "Products",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .button,
-                  ),
-                  onTap: () {
-                    App.router.pop(context);
-                    App.router.navigateTo(context, '/',
-                        transition: transitionDirection());
-                  },
-                ),
-                Divider(
-                  height: 0.0,
-                ),
-                ListTile(
                   leading: Icon(Icons.store),
                   title: Text(
                     "Vendors",
@@ -66,7 +48,7 @@ class SideDrawer extends StatelessWidget {
                   ),
                   onTap: () {
                     App.router.pop(context);
-                    App.router.navigateTo(context, '/',
+                    App.router.navigateTo(context, '/vendors',
                         transition: transitionDirection());
                   },
                 ),
@@ -81,7 +63,7 @@ class SideDrawer extends StatelessWidget {
                   ),
                   onTap: () {
                     App.router.pop(context);
-                    App.router.navigateTo(context, '/',
+                    App.router.navigateTo(context, '/favourites',
                         transition: transitionDirection());
                   },
                 ),
@@ -96,7 +78,7 @@ class SideDrawer extends StatelessWidget {
                   ),
                   onTap: () {
                     App.router.pop(context);
-                    App.router.navigateTo(context, '/',
+                    App.router.navigateTo(context, '/history',
                         transition: transitionDirection());
                   },
                 ),

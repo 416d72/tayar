@@ -12,7 +12,7 @@ class CustomScaffold extends StatefulWidget {
 
   CustomScaffold({
     @required this.body,
-    this.sideDrawer = true,
+    this.sideDrawer = false,
     this.title = '',
     this.searchBar = false,
     this.cartIcon = true,
@@ -55,7 +55,10 @@ class _CustomScaffoldState extends State<CustomScaffold> {
         }
       }),
       title: _topSearchBarDeterminer(searchBar, title),
-      actions: _actions(context, searchBar, cartIcon),
+      actions: <Widget>[
+        _searchIcon(context, searchBar),
+        _cartIcon(context, cartIcon),
+      ],
     );
   }
 
@@ -63,30 +66,33 @@ class _CustomScaffoldState extends State<CustomScaffold> {
     if (searchBar) {
       return SearchFieldWidget();
     } else {
-      return title;
+      return Center(
+        child: Text(title),
+      );
     }
   }
 
-  List<Widget> _actions(BuildContext context, bool searchIcon, bool cartIcon) {
-    List<Widget> actions;
+  Widget _searchIcon(BuildContext context, bool searchIcon) {
     if (!searchIcon) {
-      actions.add(
-        IconButton(
-          onPressed: () {
-            App.router.navigateTo(context, '/search');
-          },
-          icon: Icon(Icons.search),
-        ),
+      return IconButton(
+        onPressed: () {
+          App.router.navigateTo(context, '/');
+        },
+        icon: Icon(Icons.search),
       );
     }
+    return Container();
+  }
+
+  Widget _cartIcon(BuildContext context, bool cartIcon) {
     if (cartIcon) {
-      actions.add(IconButton(
+      return IconButton(
         onPressed: () {
           App.router.navigateTo(context, '/cart');
         },
         icon: Icon(Icons.shopping_cart),
-      ));
+      );
     }
-    return actions;
+    return Container();
   }
 }

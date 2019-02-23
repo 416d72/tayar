@@ -13,6 +13,7 @@ class _History extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      title: 'Order history',
       body: LiquidPullToRefresh(
         key: _refreshKey,
         child: ListView(

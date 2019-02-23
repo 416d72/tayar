@@ -30,8 +30,7 @@ class _BrowsePageState extends State<BrowsePage> {
 
   Widget _fancyView() {
     return CustomScaffold(
-      searchBar: false,
-      cartIcon: true,
+      title: widget.parent.toString(),
       body: Center(
         child: Text('Fancy'),
       ),
@@ -40,9 +39,7 @@ class _BrowsePageState extends State<BrowsePage> {
 
   Widget _defaultGrid() {
     return CustomScaffold(
-      searchBar: false,
-      cartIcon: true,
-      title: widget.parent,
+      title: widget.parent.toString(),
       body: StreamBuilder(
         stream: Firestore.instance
             .collection(widget.collection)

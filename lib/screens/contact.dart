@@ -10,6 +10,7 @@ class _ContactState extends State<ContactPage> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      title: 'Contact us',
       body: Center(
         child: Text('Contact Page'),
       ),
