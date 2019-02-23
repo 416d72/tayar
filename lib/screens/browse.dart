@@ -22,14 +22,18 @@ class _BrowsePageState extends State<BrowsePage> {
   @override
   Widget build(BuildContext context) {
     if (widget.fancy) {
-      return CustomScaffold(
-        body: Center(
-          child: Text('Fancy'),
-        ),
-      );
+      return _fancyView();
     } else {
       return _defaultGrid();
     }
+  }
+
+  Widget _fancyView() {
+    return CustomScaffold(
+      body: Center(
+        child: Text('Fancy'),
+      ),
+    );
   }
 
   Widget _defaultGrid() {
@@ -48,20 +52,30 @@ class _BrowsePageState extends State<BrowsePage> {
           return GridView.count(
             crossAxisCount: 2,
             children: List.generate(snapshot.data.documents.length, (index) {
-              var section = snapshot.data.documents[index];
-              var id = section.reference.documentID;
-              if (section['child'] == 'Sections') {
-                return sectionCard(context, id, section['title'],
-                    section['image'], section['child']);
+              var document = snapshot.data.documents[index];
+              var id = document.reference.documentID;
+              if (widget.collection == 'Sections') {
+                return sectionCard(context, id, document['title'],
+                    document['image'], document['child']);
               } else {
-                return productCard(context, id, section['title'],
-                    section['image'], section['child']);
+                int discount = discountCalculator(
+                    document['price-before'], document['price-after']);
+                return productCard(
+                    context, id, document['title'], document['image']);
               }
             }),
           );
         },
       ),
     );
+  }
+
+  int discountCalculator(double priceBefore, double priceAfter) {
+    if (priceBefore > priceAfter) {
+      return ((priceBefore - priceAfter) / priceBefore).ceil();
+    } else {
+      return 0;
+    }
   }
 
   Widget sectionCard(BuildContext context, String documentID, String title,
@@ -119,7 +133,7 @@ class _BrowsePageState extends State<BrowsePage> {
   }
 
   Widget productCard(BuildContext context, String documentID, String title,
-      String image, String child) {
+      String image) {
     return GestureDetector(
       onTap: () {
         print(documentID);
