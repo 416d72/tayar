@@ -12,7 +12,7 @@ class SideDrawer extends StatelessWidget {
               children: <Widget>[
                 Icon(Icons.account_circle),
                 SizedBox(height: 10.0),
-                Text('Login/Sign up'),
+                Text('Guest'),
               ],
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:tayar/screens/about.dart';
+import 'package:tayar/screens/browse.dart';
 import 'package:tayar/screens/cart.dart';
 import 'package:tayar/screens/contact.dart';
 import 'package:tayar/screens/favourites.dart';
@@ -49,15 +50,17 @@ var vendorsHandler = new Handler(
   return VendorsPage();
 });
 
-var sectionsHandler = new Handler(
+var browseHandler = new Handler(
     type: HandlerType.function,
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       String collection = params["collection"]?.first;
+      String parent = params["parent"]?.first;
       showDialog(
         context: context,
         builder: (context) {
-          return Center(
-            child: Text(collection),
+          return BrowsePage(
+            collection: collection,
+            parent: parent,
           );
         },
       );

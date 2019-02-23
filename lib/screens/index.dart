@@ -47,17 +47,11 @@ class _SectionsPageBuilder extends State<Index> {
   Widget sectionCard(BuildContext context, String parent, String title,
       String image, String child) {
     return GestureDetector(
-//      onTap: () {
-//        setState(() {
-//          _stream = Firestore.instance
-//              .collection(child)
-//              .where('active', isEqualTo: true)
-//              .where('parent', isEqualTo: '$parent')
-//              .snapshots();
-//        });
-//      },
       onTap: () {
-        App.router.navigateTo(context, '/sections?collection=Sections');
+        App.router.navigateTo(
+          context,
+          '/browse?collection=$child&parent=$parent',
+        );
       },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
