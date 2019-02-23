@@ -1,80 +1,92 @@
 import 'package:flutter/material.dart';
+import 'package:tayar/app.dart';
 import 'package:tayar/widgets/search.dart';
 import 'package:tayar/widgets/sideDrawer.dart';
 
 class CustomScaffold extends StatefulWidget {
   final Widget body;
+  final bool sideDrawer;
+  final bool searchBar;
+  final bool cartIcon;
+  final String title;
 
-  CustomScaffold({@required this.body});
+  CustomScaffold({
+    @required this.body,
+    this.sideDrawer = true,
+    this.title = '',
+    this.searchBar = false,
+    this.cartIcon = true,
+  });
   @override
-  _CustomScaffoldState createState() => _CustomScaffoldState();
+  State<StatefulWidget> createState() {
+    return _CustomScaffoldState();
+  }
 }
 
 class _CustomScaffoldState extends State<CustomScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: topBar(context, true),
+      appBar: _topBar(context, widget.sideDrawer, widget.title,
+          widget.searchBar, widget.cartIcon),
       drawer: SideDrawer(),
       body: widget.body,
     );
   }
-}
 
-class CustomScaffoldFull extends StatefulWidget {
-  final Widget body;
-
-  CustomScaffoldFull({@required this.body});
-
-  @override
-  _CustomScaffoldFullState createState() => _CustomScaffoldFullState();
-}
-
-class _CustomScaffoldFullState extends State<CustomScaffoldFull> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: topBar(context, false),
-      body: widget.body,
+  Widget _topBar(context, bool drawer, String title, bool searchBar,
+      bool cartIcon) {
+    return AppBar(
+      leading: Builder(builder: (context) {
+        if (drawer) {
+          return IconButton(
+            icon: Icon(Icons.dehaze),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          );
+        } else {
+          return IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          );
+        }
+      }),
+      title: _topSearchBarDeterminer(searchBar, title),
+      actions: _actions(context, searchBar, cartIcon),
     );
   }
-}
 
-Widget topBar(context, bool drawer) {
-  return AppBar(
-    leading: Builder(builder: (context) {
-      if (drawer == true) {
-        return IconButton(
-          icon: Icon(Icons.dehaze),
+  _topSearchBarDeterminer(bool searchBar, String title) {
+    if (searchBar) {
+      return SearchFieldWidget();
+    } else {
+      return title;
+    }
+  }
+
+  List<Widget> _actions(BuildContext context, bool searchIcon, bool cartIcon) {
+    List<Widget> actions;
+    if (!searchIcon) {
+      actions.add(
+        IconButton(
           onPressed: () {
-            Scaffold.of(context).openDrawer();
+            App.router.navigateTo(context, '/search');
           },
-        );
-      } else {
-        return IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        );
-      }
-    }),
-    title: _topSearchBarDeterminer(drawer),
-    actions: <Widget>[
-      FlatButton(
+          icon: Icon(Icons.search),
+        ),
+      );
+    }
+    if (cartIcon) {
+      actions.add(IconButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/cart');
+          App.router.navigateTo(context, '/cart');
         },
-        child: Icon(Icons.shopping_cart),
-      )
-    ],
-  );
-}
-
-_topSearchBarDeterminer(bool activate) {
-  if (activate == true) {
-    return SearchFieldWidget();
-  } else {
-    return null;
+        icon: Icon(Icons.shopping_cart),
+      ));
+    }
+    return actions;
   }
 }

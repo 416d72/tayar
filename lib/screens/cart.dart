@@ -10,6 +10,9 @@ class _Cart extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      searchBar: false,
+      cartIcon: false,
+      title: "Cart",
       body: Center(
         child: Text('Coming soon..'),
       ),

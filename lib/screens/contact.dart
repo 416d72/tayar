@@ -9,7 +9,7 @@ class ContactPage extends StatefulWidget {
 class _ContactState extends State<ContactPage> {
   @override
   Widget build(BuildContext context) {
-    return CustomScaffoldFull(
+    return CustomScaffold(
       body: Center(
         child: Text('Contact Page'),
       ),
