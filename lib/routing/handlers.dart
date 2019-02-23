@@ -61,6 +61,7 @@ var browseHandler = new Handler(
           return BrowsePage(
             collection: collection,
             parent: parent,
+            fancy: false,
           );
         },
       );
