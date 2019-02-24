@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +11,9 @@ class BrowsePage extends StatefulWidget {
   final String parent;
   final bool fancy;
 
-  const BrowsePage(
-      {Key key, @required this.collection, @required this.parent, this.fancy})
+  const BrowsePage({Key key, @required this.collection, @required this.parent, this.fancy})
       : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _BrowsePageState();
@@ -118,55 +120,143 @@ class _BrowsePageState extends State<BrowsePage> {
 
   Widget productCard(BuildContext context, String documentID, String title,
       String image, double price) {
-    return Container(
-      decoration: cardShadow(context),
-      child: Stack(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 10, 0, 70),
-            child: Center(
-              child: CachedNetworkImage(
-                imageUrl: image,
-                placeholder: Center(
-                  child: CircularProgressIndicator(),
+    return GestureDetector(
+      onTap: () {
+        productDetails(context, documentID);
+      },
+      onLongPress: () {
+        // TODO: Add to favourite with animation
+      },
+      child: Container(
+        decoration: cardShadow(context),
+        child: Stack(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 70),
+              child: Center(
+                child: CachedNetworkImage(
+                  imageUrl: image,
+                  placeholder: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  errorWidget: Text("Error loading image"),
                 ),
-                errorWidget: Text("Error loading image"),
               ),
             ),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    title,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .subhead,
-                    softWrap: true,
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "$price EGP",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .display1,
-                    softWrap: true,
-                  )
-                ],
-              ),
-            ],
-          ),
-        ],
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      title,
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .subhead,
+                      softWrap: true,
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "$price EGP",
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .display1,
+                      softWrap: true,
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
+    );
+  }
+
+  Future<void> productDetails(context, documentID) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (builderContext) {
+        return PageView(
+          scrollDirection: Axis.vertical,
+          children: <Widget>[
+            ListView(
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                          ),
+                          width: 128,
+                          height: 128,
+                          child: Image.asset('assets/images/sample-512.png'),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        IconButton(
+                            icon: Icon(
+                              Icons.arrow_back_ios,
+                              size: 36,
+                            ),
+                            onPressed: null),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        IconButton(
+                            icon: Icon(
+                              Icons.favorite_border,
+                              size: 36,
+                            ),
+                            onPressed: null),
+                      ],
+                    ),
+                  ],
+                ),
+                ListTile(
+                  title: Text('Product name'),
+                ),
+                ListTile(
+                  // Vendors list
+                  title: Table(
+                    children: [
+                      TableRow(
+                        children: [
+                          Icon(Icons.account_circle),
+                          Text('Vendor'),
+                          Text('2.05'),
+                          IconButton(
+                            icon: Icon(Icons.add_shopping_cart),
+                            onPressed: () {
+                              // TODO: Add to shopping cart
+                            },
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ],
+        );
+      },
     );
   }
 }

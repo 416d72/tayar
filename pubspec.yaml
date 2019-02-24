@@ -46,6 +46,10 @@ flutter:
 
   #  assets:
   #  - assets/images/templates/main_section_512.jpg
+  assets:
+  - assets/images/sample-512.png
+  - assets/images/sample-720.png
+  - assets/images/sample-1080.png
 
   fonts:
   - family: Frutiger
