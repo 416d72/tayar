@@ -145,15 +145,18 @@ class _BrowsePageState extends State<BrowsePage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(
-          "",
-          style: Theme
+          "Not available",
+          style:
+          Theme
               .of(context)
               .textTheme
-              .display1,
+              .display1
+              .copyWith(color: Colors.red),
           softWrap: true,
         )
       ],
     );
+    var _notAvailable = Container();
     if (price > 0) {
       _priceTag = Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -168,6 +171,20 @@ class _BrowsePageState extends State<BrowsePage> {
           )
         ],
       );
+    } else {
+      // Price = 0 (AKA) Product not available
+      _notAvailable = Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          backgroundBlendMode: BlendMode.color,
+        ),
+        child: Center(
+          child: Opacity(
+            opacity: 0.1,
+            child: Text(""),
+          ),
+        ),
+      );
     }
     return GestureDetector(
       onTap: () {
@@ -180,6 +197,7 @@ class _BrowsePageState extends State<BrowsePage> {
       onLongPress: () {
         // TODO: Add to favourite with animation
       },
+      onDoubleTap: null,
       child: Container(
         decoration: cardShadow(context),
         child: Stack(
@@ -215,6 +233,7 @@ class _BrowsePageState extends State<BrowsePage> {
                 _priceTag,
               ],
             ),
+            _notAvailable,
           ],
         ),
       ),
