@@ -191,38 +191,41 @@ class _BrowsePageState extends State<BrowsePage> {
         .get();
     var product = snapshot.data;
     var offers = product.values.toList()[0];
-    var offersList = Table(
-      children: [],
-    );
-    for (int i = 0; i < offers.length; i++) {
-      offersList.children.add(TableRow(
-        children: [
-          TableCell(
-            verticalAlignment: TableCellVerticalAlignment.middle,
-            child: Icon(Icons.account_circle),
-          ),
-          TableCell(
-            verticalAlignment: TableCellVerticalAlignment.middle,
-            child: Text(offers[i]['id']),
-          ),
-          TableCell(
-            verticalAlignment: TableCellVerticalAlignment.middle,
-            child: Text("${offers[i]['price']} EGP"),
-          ),
-          TableCell(
-            verticalAlignment: TableCellVerticalAlignment.middle,
-            child: IconButton(
-                icon: Icon(Icons.add_shopping_cart),
-                onPressed: () {
-                  // TODO: Add to cart | Remove from cart
-                }),
-          )
-        ],
-      ));
-    }
+
     return showModalBottomSheet(
       context: context,
       builder: (builderContext) {
+        var offersList = Table(
+          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+          defaultColumnWidth: IntrinsicColumnWidth(),
+          children: [],
+        );
+        for (int i = 0; i < offers.length; i++) {
+          offersList.children.add(TableRow(
+            children: [
+              TableCell(
+                child: Container(
+                  width: 32,
+                  height: 32,
+                  child: Image.asset('assets/images/sample-512.png'),
+                ),
+              ),
+              TableCell(
+                child: Text(offers[i]['id']),
+              ),
+              TableCell(
+                child: Text("${offers[i]['price']} EGP"),
+              ),
+              TableCell(
+                child: IconButton(
+                    icon: Icon(Icons.add_shopping_cart),
+                    onPressed: () {
+                      // TODO: Add to cart | Remove from cart
+                    }),
+              )
+            ],
+          ));
+        }
         return ListView(
           children: <Widget>[
             Stack(
