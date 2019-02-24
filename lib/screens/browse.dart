@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,7 +12,8 @@ class BrowsePage extends StatefulWidget {
   final String parent;
   final bool fancy;
 
-  const BrowsePage({Key key, @required this.collection, @required this.parent, this.fancy})
+  const BrowsePage(
+      {Key key, @required this.collection, @required this.parent, this.fancy})
       : super(key: key);
 
   @override
@@ -62,7 +64,9 @@ class _BrowsePageState extends State<BrowsePage> {
                 return sectionCard(context, id, document['title'],
                     document['image'], document['child']);
               } else {
-                double lowestPrice = 1.99;
+//                var offers = document['offers'].toList();
+//                print(offers);
+                double lowestPrice = 2.14;
                 return productCard(context, id, document['title'],
                     document['image'], lowestPrice);
               }
@@ -180,7 +184,15 @@ class _BrowsePageState extends State<BrowsePage> {
     );
   }
 
-  Future<void> productDetails(context, documentID) {
+  Future<void> productDetails(context, documentID) async {
+    var snapshot = await Firestore.instance
+        .collection('Products')
+        .document(documentID)
+        .get();
+    var product = snapshot.data;
+    var offers = product.values.toList()[0];
+    var lowestPrice = // Never change this, I hardly could make it work
+    List<double>.from(offers.map((it) => it['price']).toList()).reduce(min);
     return showModalBottomSheet(
       context: context,
       builder: (builderContext) {
@@ -201,7 +213,7 @@ class _BrowsePageState extends State<BrowsePage> {
                           ),
                           width: 128,
                           height: 128,
-                          child: Image.asset('assets/images/sample-512.png'),
+                          child: CachedNetworkImage(imageUrl: product['image']),
                         ),
                       ],
                     ),
@@ -210,8 +222,8 @@ class _BrowsePageState extends State<BrowsePage> {
                       children: <Widget>[
                         IconButton(
                             icon: Icon(
-                              Icons.arrow_back_ios,
-                              size: 36,
+                              Icons.keyboard_arrow_down,
+                              size: 42,
                             ),
                             onPressed: null),
                       ],
@@ -230,8 +242,19 @@ class _BrowsePageState extends State<BrowsePage> {
                   ],
                 ),
                 ListTile(
-                  title: Text('Product name'),
+                  title: Text(
+                    product['title'],
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .title,
+                  ),
                 ),
+//                ListTile(
+//                  title: ListView.builder(
+//                    itemCount: product.data['offers'].length,
+//                  ),
+//                ),
                 ListTile(
                   // Vendors list
                   title: Table(
