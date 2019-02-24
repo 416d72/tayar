@@ -191,71 +191,87 @@ class _BrowsePageState extends State<BrowsePage> {
         .get();
     var product = snapshot.data;
     var offers = product.values.toList()[0];
+    var offersList = Table(
+      children: [],
+    );
+    for (int i = 0; i < offers.length; i++) {
+      offersList.children.add(TableRow(
+        children: [
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: Icon(Icons.account_circle),
+          ),
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: Text(offers[i]['id']),
+          ),
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: Text("${offers[i]['price']} EGP"),
+          ),
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: IconButton(
+                icon: Icon(Icons.add_shopping_cart),
+                onPressed: () {
+                  // TODO: Add to cart | Remove from cart
+                }),
+          )
+        ],
+      ));
+    }
     return showModalBottomSheet(
       context: context,
       builder: (builderContext) {
-        return PageView(
-          scrollDirection: Axis.vertical,
+        return ListView(
           children: <Widget>[
-            ListView(
+            Stack(
               children: <Widget>[
-                Stack(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.green,
-                          ),
-                          width: 128,
-                          height: 128,
-                          child: CachedNetworkImage(imageUrl: product['image']),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        IconButton(
-                            icon: Icon(
-                              Icons.keyboard_arrow_down,
-                              size: 42,
-                            ),
-                            onPressed: null),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        IconButton(
-                            icon: Icon(
-                              Icons.favorite_border,
-                              size: 36,
-                            ),
-                            onPressed: null),
-                      ],
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      width: 128,
+                      height: 128,
+                      child: CachedNetworkImage(imageUrl: product['image']),
                     ),
                   ],
                 ),
-                ListTile(
-                  title: Text(
-                    product['title'],
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .title,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    IconButton(
+                        icon: Icon(
+                          Icons.keyboard_arrow_down,
+                          size: 42,
+                        ),
+                        onPressed: null),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    IconButton(
+                        icon: Icon(
+                          Icons.favorite_border,
+                          size: 36,
+                        ),
+                        onPressed: null),
+                  ],
                 ),
               ],
             ),
-            ListView.builder(
-              itemCount: offers.length,
-              itemBuilder: (BuildContext offerContext, int index) {
-                return Text("Hello $index");
-              },
+            ListTile(
+              title: Text(
+                product['title'],
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .title,
+              ),
             ),
+            offersList,
           ],
         );
       },
