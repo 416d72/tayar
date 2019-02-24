@@ -64,9 +64,9 @@ class _BrowsePageState extends State<BrowsePage> {
                 return sectionCard(context, id, document['title'],
                     document['image'], document['child']);
               } else {
-//                var offers = document['offers'].toList();
-//                print(offers);
-                double lowestPrice = 2.14;
+                var lowestPrice = List<double>.from(
+                    document['offers'].map((i) => i['price']).toList())
+                    .reduce(min);
                 return productCard(context, id, document['title'],
                     document['image'], lowestPrice);
               }
@@ -191,8 +191,6 @@ class _BrowsePageState extends State<BrowsePage> {
         .get();
     var product = snapshot.data;
     var offers = product.values.toList()[0];
-    var lowestPrice = // Never change this, I hardly could make it work
-    List<double>.from(offers.map((it) => it['price']).toList()).reduce(min);
     return showModalBottomSheet(
       context: context,
       builder: (builderContext) {
@@ -250,32 +248,13 @@ class _BrowsePageState extends State<BrowsePage> {
                         .title,
                   ),
                 ),
-//                ListTile(
-//                  title: ListView.builder(
-//                    itemCount: product.data['offers'].length,
-//                  ),
-//                ),
-                ListTile(
-                  // Vendors list
-                  title: Table(
-                    children: [
-                      TableRow(
-                        children: [
-                          Icon(Icons.account_circle),
-                          Text('Vendor'),
-                          Text('2.05'),
-                          IconButton(
-                            icon: Icon(Icons.add_shopping_cart),
-                            onPressed: () {
-                              // TODO: Add to shopping cart
-                            },
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                )
               ],
+            ),
+            ListView.builder(
+              itemCount: offers.length,
+              itemBuilder: (BuildContext offerContext, int index) {
+                return Text("Hello $index");
+              },
             ),
           ],
         );
