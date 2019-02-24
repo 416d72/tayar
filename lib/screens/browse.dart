@@ -42,14 +42,24 @@ class _BrowsePageState extends State<BrowsePage> {
   }
 
   Widget _defaultGrid() {
+    Stream _strem;
+    if (widget.collection == 'Sections') {
+      _strem = Firestore.instance
+          .collection('Sections')
+          .where('active', isEqualTo: true)
+          .where('parent', isEqualTo: widget.parent)
+          .snapshots();
+    } else {
+      // Because I want to view products disabled if they are not active or have no offers
+      _strem = Firestore.instance
+          .collection('Products')
+          .where('parent', isEqualTo: widget.parent)
+          .snapshots();
+    }
     return CustomScaffold(
       title: widget.parent.toString(),
       body: StreamBuilder(
-        stream: Firestore.instance
-            .collection(widget.collection)
-            .where('active', isEqualTo: true)
-            .where('parent', isEqualTo: widget.parent)
-            .snapshots(),
+        stream: _strem,
         builder: (context, snapshot) {
           if (!snapshot.hasData)
             return Center(
@@ -64,9 +74,16 @@ class _BrowsePageState extends State<BrowsePage> {
                 return sectionCard(context, id, document['title'],
                     document['image'], document['child']);
               } else {
-                var lowestPrice = List<double>.from(
-                    document['offers'].map((i) => i['price']).toList())
-                    .reduce(min);
+                int offerCount = 0;
+                double lowestPrice = 0;
+                if (document['offers'] != null) {
+                  offerCount = document['offers'].length;
+                }
+                if (offerCount > 0) {
+                  lowestPrice = List<double>.from(
+                      document['offers'].map((i) => i['price']).toList())
+                      .reduce(min);
+                }
                 return productCard(context, id, document['title'],
                     document['image'], lowestPrice);
               }
@@ -124,9 +141,41 @@ class _BrowsePageState extends State<BrowsePage> {
 
   Widget productCard(BuildContext context, String documentID, String title,
       String image, double price) {
+    var _priceTag = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          "",
+          style: Theme
+              .of(context)
+              .textTheme
+              .display1,
+          softWrap: true,
+        )
+      ],
+    );
+    if (price > 0) {
+      _priceTag = Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            "$price EGP",
+            style: Theme
+                .of(context)
+                .textTheme
+                .display1,
+            softWrap: true,
+          )
+        ],
+      );
+    }
     return GestureDetector(
       onTap: () {
-        productDetails(context, documentID);
+        if (price == 0) {
+          return null;
+        } else {
+          productDetails(context, documentID);
+        }
       },
       onLongPress: () {
         // TODO: Add to favourite with animation
@@ -163,19 +212,7 @@ class _BrowsePageState extends State<BrowsePage> {
                     )
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "$price EGP",
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .display1,
-                      softWrap: true,
-                    )
-                  ],
-                ),
+                _priceTag,
               ],
             ),
           ],
@@ -214,7 +251,13 @@ class _BrowsePageState extends State<BrowsePage> {
                 child: Text(offers[i]['id']),
               ),
               TableCell(
-                child: Text("${offers[i]['price']} EGP"),
+                child: Text(
+                  "${offers[i]['price']} EGP",
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .subtitle,
+                ),
               ),
               TableCell(
                 child: IconButton(
@@ -256,11 +299,12 @@ class _BrowsePageState extends State<BrowsePage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     IconButton(
-                        icon: Icon(
-                          Icons.favorite_border,
-                          size: 36,
-                        ),
-                        onPressed: null),
+                      icon: Icon(
+                        Icons.favorite_border,
+                        size: 36,
+                      ),
+                      onPressed: null,
+                    ),
                   ],
                 ),
               ],
