@@ -34,8 +34,8 @@ class _CustomScaffoldState extends State<CustomScaffold> {
     );
   }
 
-  Widget _topBar(context, bool drawer, String title, bool searchBar,
-      bool cartIcon) {
+  Widget _topBar(
+      context, bool drawer, String title, bool searchBar, bool cartIcon) {
     return AppBar(
       leading: Builder(builder: (context) {
         if (drawer) {
