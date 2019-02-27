@@ -81,8 +81,8 @@ class _BrowsePageState extends State<BrowsePage> {
                 }
                 if (offerCount > 0) {
                   lowestPrice = List<double>.from(document['offers']
-                      .map((i) => i['price'].toDouble())
-                      .toList())
+                          .map((i) => i['price'].toDouble())
+                          .toList())
                       .reduce(min);
                 }
                 return productCard(context, id, document['title'],
@@ -148,11 +148,7 @@ class _BrowsePageState extends State<BrowsePage> {
         Text(
           "Not available",
           style:
-          Theme
-              .of(context)
-              .textTheme
-              .display1
-              .copyWith(color: Colors.red),
+              Theme.of(context).textTheme.display1.copyWith(color: Colors.red),
           softWrap: true,
         )
       ],
@@ -164,10 +160,7 @@ class _BrowsePageState extends State<BrowsePage> {
         children: <Widget>[
           Text(
             "$price EGP",
-            style: Theme
-                .of(context)
-                .textTheme
-                .display1,
+            style: Theme.of(context).textTheme.display1,
             softWrap: true,
           )
         ],
@@ -223,10 +216,7 @@ class _BrowsePageState extends State<BrowsePage> {
                   children: <Widget>[
                     Text(
                       title,
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .subhead,
+                      style: Theme.of(context).textTheme.subhead,
                       softWrap: true,
                     )
                   ],
@@ -273,10 +263,7 @@ class _BrowsePageState extends State<BrowsePage> {
               TableCell(
                 child: Text(
                   "${offers[i]['price']} EGP",
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .subtitle,
+                  style: Theme.of(context).textTheme.subtitle,
                 ),
               ),
               TableCell(
@@ -332,10 +319,7 @@ class _BrowsePageState extends State<BrowsePage> {
             ListTile(
               title: Text(
                 product['title'],
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .title,
+                style: Theme.of(context).textTheme.title,
               ),
             ),
             offersList,

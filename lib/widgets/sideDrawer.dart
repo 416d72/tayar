@@ -23,10 +23,7 @@ class SideDrawer extends StatelessWidget {
                   leading: Icon(Icons.home),
                   title: Text(
                     "Home",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .button,
+                    style: Theme.of(context).textTheme.button,
                   ),
                   onTap: () {
                     App.router.pop(context);
@@ -41,10 +38,7 @@ class SideDrawer extends StatelessWidget {
                   leading: Icon(Icons.store),
                   title: Text(
                     "Vendors",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .button,
+                    style: Theme.of(context).textTheme.button,
                   ),
                   onTap: () {
                     App.router.pop(context);
@@ -96,10 +90,7 @@ class SideDrawer extends StatelessWidget {
                   leading: Icon(Icons.settings),
                   title: Text(
                     "Settings",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .button,
+                    style: Theme.of(context).textTheme.button,
                   ),
                   onTap: () {
                     App.router.navigateTo(context, '/settings',
@@ -113,10 +104,7 @@ class SideDrawer extends StatelessWidget {
                   leading: Icon(Icons.info),
                   title: Text(
                     "About",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .button,
+                    style: Theme.of(context).textTheme.button,
                   ),
                   onTap: () {
                     App.router.navigateTo(context, '/about',
