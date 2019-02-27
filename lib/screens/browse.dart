@@ -42,16 +42,16 @@ class _BrowsePageState extends State<BrowsePage> {
   }
 
   Widget _defaultGrid() {
-    Stream _strem;
+    Stream _stream;
     if (widget.collection == 'Sections') {
-      _strem = Firestore.instance
+      _stream = Firestore.instance
           .collection('Sections')
           .where('active', isEqualTo: true)
           .where('parent', isEqualTo: widget.parent)
           .snapshots();
     } else {
       // Because I want to view products disabled if they are not active or have no offers
-      _strem = Firestore.instance
+      _stream = Firestore.instance
           .collection('Products')
           .where('parent', isEqualTo: widget.parent)
           .snapshots();
@@ -59,7 +59,7 @@ class _BrowsePageState extends State<BrowsePage> {
     return CustomScaffold(
       title: widget.parent.toString(),
       body: StreamBuilder(
-        stream: _strem,
+        stream: _stream,
         builder: (context, snapshot) {
           if (!snapshot.hasData)
             return Center(
@@ -80,8 +80,9 @@ class _BrowsePageState extends State<BrowsePage> {
                   offerCount = document['offers'].length;
                 }
                 if (offerCount > 0) {
-                  lowestPrice = List<double>.from(
-                      document['offers'].map((i) => i['price']).toList())
+                  lowestPrice = List<double>.from(document['offers']
+                      .map((i) => i['price'].toDouble())
+                      .toList())
                       .reduce(min);
                 }
                 return productCard(context, id, document['title'],
@@ -246,7 +247,7 @@ class _BrowsePageState extends State<BrowsePage> {
         .document(documentID)
         .get();
     var product = snapshot.data;
-    var offers = product.values.toList()[0];
+    List offers = product.values.toList()[0];
 
     return showModalBottomSheet(
       context: context,
