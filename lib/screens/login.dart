@@ -10,7 +10,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginState extends State<LoginPage> {
   static var _globalValidator = AuthValidator();
-  static bool _isValidating = false;
+  static bool _isValidatingPhone = false;
+  static bool _isValidatingPassword = false;
   static String _errorMessage;
   TextEditingController _phoneController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -31,65 +32,66 @@ class _LoginState extends State<LoginPage> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                   ),
-                  child: Form(
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: 50,
-                        ),
-                        ListTile(
-                          title: TextField(
-                            controller: _phoneController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: roundBorder(),
-                              ),
-                              labelText: 'Phone number',
-                              errorText: _isValidating ? _errorMessage : null,
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 50,
+                      ),
+                      ListTile(
+                        title: TextField(
+                          controller: _phoneController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: roundBorder(),
                             ),
-                            style: Theme
-                                .of(context)
-                                .textTheme
-                                .subtitle,
-                            maxLength: 11,
-                            keyboardType: TextInputType.number,
-                            onChanged: (String userInput) {
-                              if (!_globalValidator.matchDigit(userInput)) {
-                                setState(() {
-                                  _isValidating = true;
-                                  _errorMessage =
-                                  "Please enter correct phone number";
-                                });
-                              } else {
-                                setState(() {
-                                  _isValidating = false;
-                                  _errorMessage = "";
-                                });
-                              }
-                            },
+                            labelText: 'Phone number',
+                            errorText:
+                            _isValidatingPhone ? _errorMessage : null,
                           ),
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .subtitle,
+                          maxLength: 11,
+                          keyboardType: TextInputType.number,
+                          onChanged: (String userInput) {
+                            if (!_globalValidator.matchDigit(userInput)) {
+                              setState(() {
+                                _isValidatingPhone = true;
+                                _errorMessage =
+                                "Please enter correct phone number";
+                              });
+                            } else {
+                              setState(() {
+                                _isValidatingPhone = false;
+                                _errorMessage = "";
+                              });
+                            }
+                          },
                         ),
-                        ListTile(
-                          title: TextField(
-                            controller: _passwordController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: roundBorder(),
-                              ),
-                              labelText: 'Password',
+                      ),
+                      ListTile(
+                        title: TextField(
+                          controller: _passwordController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: roundBorder(),
                             ),
-                            obscureText: true,
-                            style: Theme
-                                .of(context)
-                                .textTheme
-                                .subtitle,
+                            labelText: 'Password',
+                            errorText:
+                            _isValidatingPassword ? _errorMessage : null,
                           ),
+                          obscureText: true,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .subtitle,
                         ),
-                        SizedBox(
-                          height: 50,
-                        ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                    ],
                   ),
                 )
               ],
@@ -100,7 +102,7 @@ class _LoginState extends State<LoginPage> {
             child: ListTile(
               title: RaisedButton(
                 onPressed: () {
-                  print("pressed");
+                  _inputValidator();
                 },
                 child: Text(
                   'Login',
@@ -135,7 +137,7 @@ class _LoginState extends State<LoginPage> {
             trailing: FlatButton(
               onPressed: () {},
               child: Text(
-                'Need Help?',
+                'Forgot password?',
                 style: Theme
                     .of(context)
                     .textTheme
@@ -146,5 +148,46 @@ class _LoginState extends State<LoginPage> {
         ],
       ),
     );
+  }
+
+  void _inputValidator() {
+    if (_phoneValidator() && _passwordValidator()) {
+      //TODO: connect with auth service
+      return null;
+    }
+  }
+
+  bool _passwordValidator() {
+    var validator =
+    _globalValidator.passwordValidator(_passwordController.text);
+    if (!validator.result) {
+      _isValidatingPassword = true;
+      _errorMessage = validator.message;
+      return false;
+    } else {
+      setState(() {
+        _isValidatingPassword = false;
+        _errorMessage = null;
+      });
+      return true;
+    }
+  }
+
+  bool _phoneValidator() {
+    var validator =
+    _globalValidator.phoneNumberValidator(_phoneController.text);
+    if (!validator.result) {
+      setState(() {
+        _isValidatingPhone = true;
+        _errorMessage = validator.message;
+      });
+      return false;
+    } else {
+      setState(() {
+        _isValidatingPhone = false;
+        _errorMessage = null;
+      });
+      return true;
+    }
   }
 }
