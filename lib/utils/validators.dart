@@ -15,9 +15,25 @@ class AuthValidator {
     return _Return(result: true, message: null);
   }
 
-  _matchPhoneNumber(dynamic userInput) {
+  passwordValidator(dynamic userInput) {
+    if (!_matchPasswordRules(userInput)) {
+      return _Return(
+          result: false, message: "Password must be at least 8 characters");
+    }
+    return _Return(result: true, message: null);
+  }
+
+  bool _matchPasswordRules(dynamic userInput) {
+    String pattern = r'^\w{8,128}$';
     return RegExp(
-      r'^01[0?1?2?5?]\d{8}$',
+      pattern,
+      multiLine: false,
+    ).hasMatch(userInput);
+  }
+
+  bool _matchPhoneNumber(dynamic userInput) {
+    return RegExp(
+      r'^01(0|1|2|5)\d{8}$',
       multiLine: false,
     ).hasMatch(userInput);
   }
@@ -27,5 +43,8 @@ class _Return {
   final bool result;
   final String message;
 
-  const _Return({@required this.result, @required this.message});
+  const _Return({
+    @required this.result,
+    @required this.message,
+  });
 }

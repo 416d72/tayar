@@ -36,7 +36,7 @@ var favouritesHandler = new Handler(
 });
 var ordersHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return OrdersPage();
+  return OrdersPage();
 });
 var loginHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -44,8 +44,8 @@ var loginHandler = new Handler(
 });
 var registerHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return RegisterPage();
-    });
+  return RegisterPage();
+});
 var settingsHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return SettingsPage();
