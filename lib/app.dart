@@ -40,8 +40,8 @@ ThemeData customTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
     textTheme: _buildTextTheme(base.textTheme),
-    primaryColor: Colors.deepOrange,
-    accentColor: Colors.orangeAccent,
+    primaryColor: Colors.cyan,
+    accentColor: Colors.cyanAccent,
   );
 }
 
@@ -56,4 +56,8 @@ cardShadow(context) {
       ),
     ],
   );
+}
+
+roundBorder() {
+  return BorderRadius.all(Radius.circular(20));
 }

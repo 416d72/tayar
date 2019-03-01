@@ -5,9 +5,10 @@ import 'package:tayar/screens/browse.dart';
 import 'package:tayar/screens/cart.dart';
 import 'package:tayar/screens/contact.dart';
 import 'package:tayar/screens/favourites.dart';
-import 'package:tayar/screens/history.dart';
 import 'package:tayar/screens/index.dart';
 import 'package:tayar/screens/login.dart';
+import 'package:tayar/screens/orders.dart';
+import 'package:tayar/screens/register.dart';
 import 'package:tayar/screens/settings.dart';
 import 'package:tayar/screens/vendors.dart';
 // Screens
@@ -33,14 +34,18 @@ var favouritesHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return FavouritesPage();
 });
-var historyHandler = new Handler(
+var ordersHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  return HistoryPage();
+      return OrdersPage();
 });
 var loginHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return LoginPage();
 });
+var registerHandler = new Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      return RegisterPage();
+    });
 var settingsHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return SettingsPage();

@@ -67,12 +67,12 @@ class SideDrawer extends StatelessWidget {
                 ListTile(
                   leading: Icon(Icons.history),
                   title: Text(
-                    "History",
+                    "My Orders",
                     style: Theme.of(context).textTheme.button,
                   ),
                   onTap: () {
                     App.router.pop(context);
-                    App.router.navigateTo(context, '/history',
+                    App.router.navigateTo(context, '/orders',
                         transition: transitionDirection());
                   },
                 ),
