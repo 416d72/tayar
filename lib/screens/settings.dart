@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tayar/app.dart';
 import 'package:tayar/widgets/scaffold.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -12,7 +13,24 @@ class _SettingsState extends State<SettingsPage> {
     return CustomScaffold(
       title: 'App settings',
       body: Center(
-        child: Text('Settings Page'),
+        child: ListView(
+          children: <Widget>[
+            ListTile(
+              title: Text('Account'),
+            ),
+            ListTile(
+              title: FlatButton(
+                onPressed: () {
+                  App.router.navigateTo(
+                    context,
+                    '/login',
+                  );
+                },
+                child: Text('Login'),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

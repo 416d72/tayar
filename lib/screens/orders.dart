@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:tayar/widgets/scaffold.dart';
 
-class HistoryPage extends StatefulWidget {
+class OrdersPage extends StatefulWidget {
   @override
-  _History createState() => _History();
+  _OrdersState createState() => _OrdersState();
 }
 
-class _History extends State<HistoryPage> {
+class _OrdersState extends State<OrdersPage> {
   var _refreshKey = GlobalKey<RefreshIndicatorState>();
 
   @override
@@ -37,6 +37,7 @@ class _History extends State<HistoryPage> {
     _refreshKey.currentState?.show();
     await Future.delayed(Duration(seconds: 1));
     // TODO: fetch history from database
+    // TODO: Implement 3 top tabs (Wait list - Scheduled - History)
     return null;
   }
 }

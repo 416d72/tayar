@@ -7,6 +7,7 @@ class CustomScaffold extends StatefulWidget {
   final Widget body;
   final bool sideDrawer;
   final bool searchBar;
+  final bool searchIcon;
   final bool cartIcon;
   final String title;
 
@@ -15,6 +16,7 @@ class CustomScaffold extends StatefulWidget {
     this.sideDrawer = false,
     this.title = '',
     this.searchBar = false,
+    this.searchIcon = true,
     this.cartIcon = true,
   });
   @override
@@ -56,8 +58,13 @@ class _CustomScaffoldState extends State<CustomScaffold> {
       }),
       title: _topSearchBarDeterminer(searchBar, title),
       actions: <Widget>[
-        _searchIcon(context, searchBar),
+        _searchIcon(context),
         _cartIcon(context, cartIcon),
+        IconButton(
+          // TODO: Remove this before final release
+          icon: Icon(Icons.build),
+          onPressed: () => App.router.navigateTo(context, '/login'),
+        )
       ],
     );
   }
@@ -72,14 +79,18 @@ class _CustomScaffoldState extends State<CustomScaffold> {
     }
   }
 
-  Widget _searchIcon(BuildContext context, bool searchIcon) {
-    if (!searchIcon) {
-      return IconButton(
-        onPressed: () {
-          App.router.navigateTo(context, '/');
-        },
-        icon: Icon(Icons.search),
-      );
+  Widget _searchIcon(BuildContext context) {
+    if (widget.searchIcon) {
+      if (!widget.searchBar) {
+        return IconButton(
+          onPressed: () {
+            App.router.navigateTo(context, '/');
+          },
+          icon: Icon(Icons.search),
+        );
+      }
+    } else {
+      return Container();
     }
     return Container();
   }

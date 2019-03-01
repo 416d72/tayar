@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +21,9 @@ class _SectionsPageBuilder extends State<Index> {
   Stream _stream = Firestore.instance
       .collection('Sections')
       .where('active', isEqualTo: true)
-      .where('parent', isEqualTo: '/')
+      .where('parent', isEqualTo: 'grocery')
       .snapshots();
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
