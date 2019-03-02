@@ -23,6 +23,14 @@ class AuthValidator {
     return _Return(result: true, message: null);
   }
 
+  smsCodeValidator(dynamic userInput) {
+    if (!_matchSMSCode(userInput)) {
+      return _Return(result: false, message: "Wrong Code");
+    } else {
+      return _Return(result: true, message: null);
+    }
+  }
+
   bool _matchPasswordRules(dynamic userInput) {
     String pattern = r'^\w{8,128}$';
     return RegExp(
@@ -34,6 +42,13 @@ class AuthValidator {
   bool _matchPhoneNumber(dynamic userInput) {
     return RegExp(
       r'^01(0|1|2|5)\d{8}$',
+      multiLine: false,
+    ).hasMatch(userInput);
+  }
+
+  bool _matchSMSCode(dynamic userInput) {
+    return RegExp(
+      r'^\d{6}$',
       multiLine: false,
     ).hasMatch(userInput);
   }
