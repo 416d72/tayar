@@ -51,7 +51,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
           return IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.of(context).pop();
+              App.router.pop(context);
             },
           );
         }
