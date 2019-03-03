@@ -195,7 +195,7 @@ class _RegisterState extends State<RegisterPage> {
         // Actions
         onStepTapped: (step) {
           setState(() {
-            _currentStep = step;
+//            _currentStep = step;
           });
         },
         onStepContinue: () => _stepValidator(context),
