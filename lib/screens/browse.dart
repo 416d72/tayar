@@ -87,6 +87,7 @@ class _BrowsePageState extends State<BrowsePage> {
                 return sectionCard(context, id, document['title'],
                     document['image'], document['child']);
               } else {
+                // Products
                 int offerCount = 0;
                 double lowestPrice = 0;
                 if (document['offers'] != null) {
@@ -333,7 +334,7 @@ class _BrowsePageState extends State<BrowsePage> {
                         Icons.favorite_border,
                         size: 36,
                       ),
-                      onPressed: null,
+                      onPressed: () {},
                     ),
                   ],
                 ),

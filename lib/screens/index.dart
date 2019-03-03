@@ -75,10 +75,15 @@ class _SectionsPageBuilder extends State<Index> {
               ),
               child: CachedNetworkImage(
                 imageUrl: image,
-                placeholder: Center(
-                  child: CircularProgressIndicator(),
-                ),
-                errorWidget: Text("Error loading image"),
+                placeholder: (BuildContext context, String url) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+                errorWidget:
+                    (BuildContext context, String url, Exception error) {
+                  return Text("Error loading image");
+                },
               ),
             ),
             Column(
