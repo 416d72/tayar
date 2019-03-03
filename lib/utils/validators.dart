@@ -37,7 +37,7 @@ class AuthValidator {
 
   bool _matchPasswordRules(dynamic userInput) {
     return RegExp(
-      r'(\w){8,128}',
+      r'^(\w){8,128}$',
       multiLine: false,
     ).hasMatch(userInput);
   }

@@ -13,11 +13,12 @@ class BrowsePage extends StatefulWidget {
   final String product;
   final bool fancy;
 
-  const BrowsePage({Key key,
-    @required this.collection,
-    @required this.parent,
-    this.product,
-    this.fancy})
+  const BrowsePage(
+      {Key key,
+      @required this.collection,
+      @required this.parent,
+      this.product,
+      this.fancy})
       : super(key: key);
 
   @override
