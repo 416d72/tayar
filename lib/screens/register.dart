@@ -164,6 +164,7 @@ class _RegisterState extends State<RegisterPage> {
                   height: 5,
                 ),
                 TextField(
+                  controller: _passwordController,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock),
                     suffixIcon: IconButton(
@@ -244,7 +245,7 @@ class _RegisterState extends State<RegisterPage> {
       }
     } else if (_currentStep == 2) {
       var validator = _globalValidator.passwordValidator(
-          _passwordController.text, _phoneNumber);
+          _passwordController.text, _phoneController.text);
       if (!validator.result) {
         setState(() {
           _isValidatingPassword = true;
@@ -301,6 +302,7 @@ class _RegisterState extends State<RegisterPage> {
       _isValidatingPhone = false;
       _isValidatingSMSCode = false;
       _errorMessage = null;
+      _currentStep = 2;
       _mainButtonText = Text('Confirm password');
     });
     _continue(2);
