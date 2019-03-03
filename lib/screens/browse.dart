@@ -55,19 +55,11 @@ class _BrowsePageState extends State<BrowsePage> {
           .where('parent', isEqualTo: widget.parent)
           .snapshots();
     } else {
-      if (widget.product != null) {
-        // A shortcut to view product card directly if called from cart or favourite list
-        _stream = Firestore.instance
-            .collection('Products')
-            .where('parent', isEqualTo: widget.parent)
-            .snapshots();
-      } else {
-        // Because I want to view products disabled if they are not active or have no offers
-        _stream = Firestore.instance
-            .collection('Products')
-            .where('parent', isEqualTo: widget.parent)
-            .snapshots();
-      }
+      // Because I want to view products disabled if they are not active or have no offers
+      _stream = Firestore.instance
+          .collection('Products')
+          .where('parent', isEqualTo: widget.parent)
+          .snapshots();
     }
     return CustomScaffold(
       title: widget.parent.toString(),
