@@ -15,10 +15,14 @@ class AuthValidator {
     return _Return(result: true, message: null);
   }
 
-  passwordValidator(dynamic userInput) {
+  passwordValidator(dynamic userInput, String phoneNumber) {
     if (!_matchPasswordRules(userInput)) {
       return _Return(
-          result: false, message: "Password must be at least 8 characters");
+          result: false, message: "Password doesn't meet our security rules");
+    } else if (userInput == phoneNumber) {
+      return _Return(
+          result: false,
+          message: "You can't use your phone number as a password,");
     }
     return _Return(result: true, message: null);
   }
@@ -32,9 +36,8 @@ class AuthValidator {
   }
 
   bool _matchPasswordRules(dynamic userInput) {
-    String pattern = r'^\w{8,128}$';
     return RegExp(
-      pattern,
+      r'(\w){8,128}',
       multiLine: false,
     ).hasMatch(userInput);
   }

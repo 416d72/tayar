@@ -10,10 +10,14 @@ import 'package:tayar/widgets/scaffold.dart';
 class BrowsePage extends StatefulWidget {
   final String collection;
   final String parent;
+  final String product;
   final bool fancy;
 
-  const BrowsePage(
-      {Key key, @required this.collection, @required this.parent, this.fancy})
+  const BrowsePage({Key key,
+    @required this.collection,
+    @required this.parent,
+    this.product,
+    this.fancy})
       : super(key: key);
 
   @override
@@ -50,11 +54,19 @@ class _BrowsePageState extends State<BrowsePage> {
           .where('parent', isEqualTo: widget.parent)
           .snapshots();
     } else {
-      // Because I want to view products disabled if they are not active or have no offers
-      _stream = Firestore.instance
-          .collection('Products')
-          .where('parent', isEqualTo: widget.parent)
-          .snapshots();
+      if (widget.product != null) {
+        // A shortcut to view product card directly if called from cart or favourite list
+        _stream = Firestore.instance
+            .collection('Products')
+            .where('parent', isEqualTo: widget.parent)
+            .snapshots();
+      } else {
+        // Because I want to view products disabled if they are not active or have no offers
+        _stream = Firestore.instance
+            .collection('Products')
+            .where('parent', isEqualTo: widget.parent)
+            .snapshots();
+      }
     }
     return CustomScaffold(
       title: widget.parent.toString(),

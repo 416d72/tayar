@@ -68,36 +68,43 @@ class _RegisterState extends State<RegisterPage> {
             title: Text("Phone Number"),
             subtitle: Text(
                 'We need your 11 digit phone number to verify your identity!'),
-            content: TextField(
-              controller: _phoneController,
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.phone),
-                labelText: '01XXXXXXXXX',
-                errorText: _isValidatingPhone ? _errorMessage : null,
-                border: OutlineInputBorder(
-                  borderRadius: roundBorder(),
+            content: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 5,
                 ),
-              ),
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .subtitle,
-              maxLength: 11,
-              keyboardType: TextInputType.number,
-              autocorrect: false,
-              onChanged: (String number) {
-                if (!_globalValidator.matchDigit(number)) {
-                  setState(() {
-                    _isValidatingPhone = true;
-                    _errorMessage = "Please enter correct phone number";
-                  });
-                } else {
-                  setState(() {
-                    _isValidatingPhone = false;
-                    _errorMessage = "";
-                  });
-                }
-              },
+                TextField(
+                  controller: _phoneController,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.phone),
+                    labelText: '01XXXXXXXXX',
+                    errorText: _isValidatingPhone ? _errorMessage : null,
+                    border: OutlineInputBorder(
+                      borderRadius: roundBorder(),
+                    ),
+                  ),
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .subtitle,
+                  maxLength: 11,
+                  keyboardType: TextInputType.number,
+                  autocorrect: false,
+                  onChanged: (String number) {
+                    if (!_globalValidator.matchDigit(number)) {
+                      setState(() {
+                        _isValidatingPhone = true;
+                        _errorMessage = "Please enter correct phone number";
+                      });
+                    } else {
+                      setState(() {
+                        _isValidatingPhone = false;
+                        _errorMessage = "";
+                      });
+                    }
+                  },
+                )
+              ],
             ),
             state: _firstStepState,
             isActive: true,
@@ -106,37 +113,44 @@ class _RegisterState extends State<RegisterPage> {
             title: Text('Verify'),
             subtitle: Text(
                 'We have sent an SMS with verification code to your phone'),
-            content: TextField(
-              controller: _smsController,
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.message),
-                labelText: 'Enter activation code',
-                border: OutlineInputBorder(
-                  borderRadius: roundBorder(),
+            content: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 5,
                 ),
-                errorText: _isValidatingSMSCode ? _errorMessage : null,
-              ),
-              onChanged: (String userInput) {
-                if (!_globalValidator.matchDigit(userInput)) {
-                  setState(() {
-                    _isValidatingSMSCode = true;
-                    _errorMessage = "Please use only digits";
-                  });
-                } else {
-                  setState(() {
-                    _isValidatingSMSCode = false;
-                    _errorMessage = null;
-                  });
-                }
-              },
-              textAlign: TextAlign.center,
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .subtitle,
-              maxLength: 6,
-              keyboardType: TextInputType.number,
-              autocorrect: false,
+                TextField(
+                  controller: _smsController,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.message),
+                    labelText: 'Enter activation code',
+                    border: OutlineInputBorder(
+                      borderRadius: roundBorder(),
+                    ),
+                    errorText: _isValidatingSMSCode ? _errorMessage : null,
+                  ),
+                  onChanged: (String userInput) {
+                    if (!_globalValidator.matchDigit(userInput)) {
+                      setState(() {
+                        _isValidatingSMSCode = true;
+                        _errorMessage = "Please use only digits";
+                      });
+                    } else {
+                      setState(() {
+                        _isValidatingSMSCode = false;
+                        _errorMessage = null;
+                      });
+                    }
+                  },
+                  textAlign: TextAlign.center,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .subtitle,
+                  maxLength: 6,
+                  keyboardType: TextInputType.number,
+                  autocorrect: false,
+                ),
+              ],
             ),
             state: _secondStepState,
             isActive: true,
@@ -144,35 +158,43 @@ class _RegisterState extends State<RegisterPage> {
           Step(
             title: Text("Password"),
             subtitle: Text('Use only letters and digits'),
-            content: TextField(
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.lock),
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.remove_red_eye),
-                  onPressed: () {
-                    if (_passwordObscured) {
-                      setState(() {
-                        _passwordObscured = false;
-                      });
-                    } else {
-                      setState(() {
-                        _passwordObscured = true;
-                      });
-                    }
-                  },
+            content: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 5,
                 ),
-                labelText: 'Must be more than 8 characters and less than 128',
-                border: OutlineInputBorder(
-                  borderRadius: roundBorder(),
-                ),
-                errorText: _isValidatingPassword ? _errorMessage : null,
-              ),
-              obscureText: _passwordObscured,
-              autocorrect: false,
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .subtitle,
+                TextField(
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.lock),
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.remove_red_eye),
+                      onPressed: () {
+                        if (_passwordObscured) {
+                          setState(() {
+                            _passwordObscured = false;
+                          });
+                        } else {
+                          setState(() {
+                            _passwordObscured = true;
+                          });
+                        }
+                      },
+                    ),
+                    labelText:
+                    'Must be more than 8 characters and less than 128',
+                    border: OutlineInputBorder(
+                      borderRadius: roundBorder(),
+                    ),
+                    errorText: _isValidatingPassword ? _errorMessage : null,
+                  ),
+                  obscureText: _passwordObscured,
+                  autocorrect: false,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .subtitle,
+                )
+              ],
             ),
             state: _thirdStepState,
             isActive: true,
@@ -210,31 +232,36 @@ class _RegisterState extends State<RegisterPage> {
         });
       } else {
         setState(() {
-          _isValidatingSMSCode = false;
-          _errorMessage = null;
-          _secondStepState = StepState.complete;
-          _thirdStepState = StepState.editing;
-          _mainButtonText = Text('Confirm password');
+          _smsCode = _smsController.text;
         });
-        _continue(2);
+        _auth.currentUser().then((user) {
+          if (user != null) {
+            _finishPhoneAuth();
+          } else {
+            _verifySMSCode();
+          }
+        });
       }
     } else if (_currentStep == 2) {
-      var validator =
-      _globalValidator.passwordValidator(_passwordController.text);
+      var validator = _globalValidator.passwordValidator(
+          _passwordController.text, _phoneNumber);
       if (!validator.result) {
         setState(() {
           _isValidatingPassword = true;
           _errorMessage = validator.message;
         });
       } else {
-        // Continue
+        setState(() {
+          _isValidatingPassword = false;
+        });
+        _updatePassword(context);
       }
     }
   }
 
-  Future _phoneConfirm(BuildContext context) {
+  Future _phoneConfirm(BuildContext bigcontext) {
     return showDialog(
-        context: context,
+        context: bigcontext,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Is this your phone?'),
@@ -258,8 +285,7 @@ class _RegisterState extends State<RegisterPage> {
                       Navigator.of(context).pop();
                       _firstStepState = StepState.complete;
                       _secondStepState = StepState.editing;
-                      sendSMS();
-                      _continue(1);
+                      _sendSMS(bigcontext);
                     }),
                 child: Text('Yes'),
               )
@@ -268,41 +294,113 @@ class _RegisterState extends State<RegisterPage> {
         });
   }
 
-  Future<void> sendSMS() async {
-    final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {
-      _verificationID = verId;
-    };
+  void _finishPhoneAuth() {
+    setState(() {
+      _firstStepState = StepState.complete;
+      _secondStepState = StepState.complete;
+      _isValidatingPhone = false;
+      _isValidatingSMSCode = false;
+      _errorMessage = null;
+      _mainButtonText = Text('Confirm password');
+    });
+    _continue(2);
+  }
+
+  Future<void> _sendSMS(BuildContext context) async {
+    final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {};
     final PhoneCodeSent smsCodeSent = (String verId, [int forceCodeResend]) {
-      _verificationID = verId;
+      setState(() {
+        _verificationID = verId;
+      });
+      _continue(1);
     };
     final PhoneVerificationCompleted verifiedSuccess = (FirebaseUser user) {
-      String token = user.getIdToken().toString();
-      print("uid: ${user.uid}");
-      print("meta: ${user.metadata}");
-      print(token);
+      _finishPhoneAuth();
+      _continue(2);
     };
 
     final PhoneVerificationFailed verifiedFailed = (AuthException exception) {
-      print('Error: ${exception.message}');
+      print("Error: ${exception.message}");
+      setState(() {
+        _errorMessage = "Something went wrong";
+      });
+      _errorDialog(context);
     };
+
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: _phoneNumber,
       codeAutoRetrievalTimeout: autoRetrieve,
       codeSent: smsCodeSent,
-      timeout: const Duration(seconds: 2),
+      timeout: Duration(seconds: 60),
       verificationCompleted: verifiedSuccess,
       verificationFailed: verifiedFailed,
     );
   }
 
-  void _continue(int currentStep) {
-    setState(() {
-      if (_currentStep < 2) {
-        _currentStep = _currentStep + 1;
+  Future<String> _verifySMSCode() async {
+    final AuthCredential credential = PhoneAuthProvider.getCredential(
+      verificationId: _verificationID,
+      smsCode: _smsCode,
+    );
+    final FirebaseUser user = await _auth.signInWithCredential(credential);
+    final FirebaseUser currentUser = await _auth.currentUser();
+
+    assert(user.uid == currentUser.uid);
+
+    _smsController.text = '';
+    _finishPhoneAuth();
+    return 'signInWithPhoneNumber succeeded: $user';
+  }
+
+  Future<void> _updatePassword(BuildContext context) async {
+    await _auth.currentUser().then((user) {
+      if (user != null) {
+        user.updatePassword(_passwordController.text).whenComplete(() {
+          setState(() {
+            _thirdStepState = StepState.complete;
+          });
+          _continue(3);
+        }).catchError((e) {
+          print(e);
+          setState(() {
+            _errorMessage =
+            "Couldn't register your password, please try again later";
+          });
+          _errorDialog(context);
+        });
       } else {
-        // TODO: Validate data and register a new user
-        return null;
+        setState(() {
+          _errorMessage = "You are not logged in";
+        });
+        _errorDialog(context);
       }
     });
+  }
+
+  Future<Widget> _errorDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text(_errorMessage),
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('Close'),
+              )
+            ],
+          );
+        });
+  }
+
+  void _continue(int currentStep) {
+    if (_currentStep < 2) {
+      setState(() {
+        _currentStep = _currentStep + 1;
+      });
+    } else {
+      print("Now you are logged in");
+    }
   }
 }

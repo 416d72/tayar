@@ -51,7 +51,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
           return IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              App.router.pop(context);
+              Navigator.maybePop(context);
             },
           );
         }
@@ -63,7 +63,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
         IconButton(
           // TODO: Remove this before final release
           icon: Icon(Icons.build),
-          onPressed: () => App.router.navigateTo(context, '/login'),
+          onPressed: () => App.router.navigateTo(context, '/register'),
         )
       ],
     );
