@@ -123,10 +123,15 @@ class _BrowsePageState extends State<BrowsePage> {
               decoration: cardShadow(context),
               child: CachedNetworkImage(
                 imageUrl: image,
-                placeholder: Center(
-                  child: CircularProgressIndicator(),
-                ),
-                errorWidget: Text("Error loading image"),
+                placeholder: (BuildContext context, String url) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+                errorWidget:
+                    (BuildContext context, String url, Exception error) {
+                  return Text("Error loading image");
+                },
               ),
             ),
             Column(
@@ -214,10 +219,15 @@ class _BrowsePageState extends State<BrowsePage> {
               child: Center(
                 child: CachedNetworkImage(
                   imageUrl: image,
-                  placeholder: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  errorWidget: Text("Error loading image"),
+                  placeholder: (BuildContext context, String url) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                  errorWidget:
+                      (BuildContext context, String url, Exception error) {
+                    return Text("Error loading image");
+                  },
                 ),
               ),
             ),

@@ -83,10 +83,7 @@ class _RegisterState extends State<RegisterPage> {
                       borderRadius: roundBorder(),
                     ),
                   ),
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .subtitle,
+                  style: Theme.of(context).textTheme.subtitle,
                   maxLength: 11,
                   keyboardType: TextInputType.number,
                   autocorrect: false,
@@ -142,10 +139,7 @@ class _RegisterState extends State<RegisterPage> {
                     }
                   },
                   textAlign: TextAlign.center,
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .subtitle,
+                  style: Theme.of(context).textTheme.subtitle,
                   maxLength: 6,
                   keyboardType: TextInputType.number,
                   autocorrect: false,
@@ -182,7 +176,7 @@ class _RegisterState extends State<RegisterPage> {
                       },
                     ),
                     labelText:
-                    'Must be more than 8 characters and less than 128',
+                        'Must be more than 8 characters and less than 128',
                     border: OutlineInputBorder(
                       borderRadius: roundBorder(),
                     ),
@@ -190,10 +184,7 @@ class _RegisterState extends State<RegisterPage> {
                   ),
                   obscureText: _passwordObscured,
                   autocorrect: false,
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .subtitle,
+                  style: Theme.of(context).textTheme.subtitle,
                 )
               ],
             ),
@@ -215,7 +206,7 @@ class _RegisterState extends State<RegisterPage> {
   void _stepValidator(BuildContext context) {
     if (_currentStep == 0) {
       var validator =
-      _globalValidator.phoneNumberValidator(_phoneController.text);
+          _globalValidator.phoneNumberValidator(_phoneController.text);
       if (!validator.result) {
         setState(() {
           _isValidatingPhone = true;
@@ -267,15 +258,14 @@ class _RegisterState extends State<RegisterPage> {
           return AlertDialog(
             title: Text('Is this your phone?'),
             content:
-            Text('Are you sure your number is ${_phoneController.text} ?'),
+                Text('Are you sure your number is ${_phoneController.text} ?'),
             actions: <Widget>[
               FlatButton(
                 onPressed: () => Navigator.of(context).pop(),
                 child: Text('No, return and edit'),
               ),
               FlatButton(
-                onPressed: () =>
-                    setState(() {
+                onPressed: () => setState(() {
                       _phoneIsCorrect = true;
                       setState(() {
                         _isValidatingPhone = false;
@@ -366,7 +356,7 @@ class _RegisterState extends State<RegisterPage> {
           print(e);
           setState(() {
             _errorMessage =
-            "Couldn't register your password, please try again later";
+                "Couldn't register your password, please try again later";
           });
           _errorDialog(context);
         });
