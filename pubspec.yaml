@@ -29,11 +29,12 @@ dependencies:
   fluro: ^1.4.0
 
   # Local database
-  sqflite: any
+  sqflite: ^1.1.1
+  shared_preferences: ^0.5.1+1
 
   # Other
   duration: ^2.0.4
-  cached_network_image: ^0.5.1
+  cached_network_image: ^0.6.2
 
   #   UI
   liquid_pull_to_refresh: ^1.1.0
