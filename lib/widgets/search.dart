@@ -9,14 +9,26 @@ class _SearchField extends State<SearchFieldWidget> {
   // Display search input field
   @override
   Widget build(BuildContext context) {
-    return Container(
-//      alignment: Alignment(0.0, -1.0),
-      child: TextFormField(
-        style: Theme.of(context).textTheme.subhead,
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(0.0),
-          labelText: "What are you looking for?",
+    return TextField(
+      style: Theme
+          .of(context)
+          .textTheme
+          .subtitle
+          .copyWith(
+        fontSize: 16,
+        fontWeight: FontWeight.normal,
+        height: 2,
+      ),
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(5),
+          ),
         ),
+        contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        labelText: "What are you looking for?",
       ),
     );
   }

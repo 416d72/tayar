@@ -21,7 +21,7 @@ class _LoginState extends State<LoginPage> {
     return CustomScaffold(
       cartIcon: false,
       searchIcon: false,
-      title: 'Login/Signup',
+      title: 'Login',
       body: ListView(
         children: <Widget>[
           SafeArea(
@@ -159,7 +159,7 @@ class _LoginState extends State<LoginPage> {
 
   bool _passwordValidator() {
     var validator =
-    _globalValidator.passwordValidator(_passwordController.text);
+    _globalValidator.passwordValidator(_passwordController.text, null);
     if (!validator.result) {
       _isValidatingPassword = true;
       _errorMessage = validator.message;

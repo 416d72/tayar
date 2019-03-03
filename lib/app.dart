@@ -40,8 +40,8 @@ ThemeData customTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
     textTheme: _buildTextTheme(base.textTheme),
-    primaryColor: Colors.cyan,
-    accentColor: Colors.cyanAccent,
+    primaryColor: Colors.teal,
+    accentColor: Colors.tealAccent,
   );
 }
 

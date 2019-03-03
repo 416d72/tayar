@@ -60,12 +60,14 @@ var browseHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       String collection = params["collection"]?.first;
       String parent = params["parent"]?.first;
+      String product = params['product']?.first;
       showDialog(
         context: context,
         builder: (context) {
           return BrowsePage(
             collection: collection,
             parent: parent,
+            product: product,
             fancy: false,
           );
         },
