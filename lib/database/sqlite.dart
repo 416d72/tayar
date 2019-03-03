@@ -4,7 +4,7 @@ import 'dart:io' as io;
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:tayar/database/models/favourites.dart';
+import 'package:tayar/database/models/favouritesModel.dart';
 
 class DBHelper {
   static Database _db;
@@ -28,23 +28,50 @@ class DBHelper {
     print("Created `Favourites` table");
   }
 
-  void saveFavourite(Favourite favourite) async {
+  Future<bool> toggleFavourite(Favourite favourite) async {
+    var dbClient = await db;
+    var result = Sqflite.firstIntValue(await dbClient.rawQuery(
+        "SELECT COUNT(`id`) FROM Favourites WHERE `documentID` = ${favourite
+            .documentID};"));
+    if (result == 0) {
+      _addFavourite(favourite);
+      return true;
+    } else {
+      _removeFavourite(favourite);
+      return false;
+    }
+  }
+
+  void _addFavourite(Favourite favourite) async {
     var dbClient = await db;
     await dbClient.transaction((txn) async {
       return await txn.rawInsert(
           "INSERT INTO Favourites(`documentID`,`title`,`image`) VALUES ('${favourite.documentID}','${favourite.title}','${favourite.image}');");
     });
+    print("Added ${favourite.title}");
+  }
+
+  void _removeFavourite(Favourite favourite) async {
+    var dbClient = await db;
+    await dbClient.transaction((txn) async {
+      return await txn.rawDelete(
+          "DELETE FROM Favourites WHERE documentID = ${favourite.documentID};");
+    });
+    print("Removed ${favourite.title}");
   }
 
   Future<List<Favourite>> getFavourites() async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Favourites');
+    List<Map> favList = await dbClient.rawQuery('SELECT * FROM Favourites;');
     List<Favourite> favourites = new List();
-    for (int i = 0; i < list.length; i++) {
+    for (int i = 0; i < favList.length; i++) {
       favourites.add(new Favourite(
-          list[i]["documentID"], list[i]["title"], list[i]["image"]));
+          favList[i]["documentID"], favList[i]["title"], favList[i]["image"]));
     }
-    print("List length: ${favourites.length}.");
+//    favourites.add(Favourite(
+//        "NJrpv4UN5781vLichAdr",
+//        "Doritos Cheese flavour 65g",
+//        "https://target.scene7.com/is/image/Target/GUEST_b3c1fd21-ea1c-4e0c-851c-366612d86ea4"));
     return favourites;
   }
 }
