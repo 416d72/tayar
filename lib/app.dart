@@ -50,7 +50,9 @@ cardShadow(context) {
     color: Colors.white,
     boxShadow: [
       BoxShadow(
-        color: Colors.orangeAccent,
+        color: Theme
+            .of(context)
+            .primaryColor,
         blurRadius: 1.0,
         spreadRadius: 0.0,
       ),
