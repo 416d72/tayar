@@ -6,6 +6,7 @@ class Routes {
   static String root = "/";
   static String browse = "/browse";
   static String fancyBrowse = "/browse/fancy";
+  static String product = "/product";
   static String about = "/about";
   static String cart = "/cart";
   static String contact = "/contact";
@@ -23,6 +24,7 @@ class Routes {
     });
     router.define(root, handler: indexHandler);
     router.define(browse, handler: browseHandler);
+    router.define(product, handler: productHandler);
     router.define(about, handler: aboutHandler);
     router.define(cart, handler: cartHandler);
     router.define(contact, handler: contactHandler);

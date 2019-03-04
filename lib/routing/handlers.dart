@@ -8,6 +8,7 @@ import 'package:tayar/screens/favourites.dart';
 import 'package:tayar/screens/index.dart';
 import 'package:tayar/screens/login.dart';
 import 'package:tayar/screens/orders.dart';
+import 'package:tayar/screens/product.dart';
 import 'package:tayar/screens/register.dart';
 import 'package:tayar/screens/settings.dart';
 import 'package:tayar/screens/vendors.dart';
@@ -68,6 +69,17 @@ var browseHandler = new Handler(
             parent: parent,
             fancy: false,
           );
+        },
+      );
+    });
+var productHandler = new Handler(
+    type: HandlerType.function,
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      String id = params["id"]?.first;
+      showDialog(
+        context: context,
+        builder: (context) {
+          return ProductPage(productID: id);
         },
       );
     });
