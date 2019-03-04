@@ -46,7 +46,8 @@ class DBHelper {
     var dbClient = await db;
     await dbClient.transaction((txn) async {
       return await txn.rawInsert(
-          "INSERT INTO Favourites(`documentID`,`title`,`image`) VALUES ('${favourite.documentID}','${favourite.title}','${favourite.image}');");
+          "INSERT INTO Favourites(`documentID`,`title`,`image`) VALUES ('${favourite
+              .documentID}', '${favourite.title}','${favourite.image}');");
     });
     print("Added ${favourite.title}");
   }
@@ -68,10 +69,10 @@ class DBHelper {
       favourites.add(new Favourite(
           favList[i]["documentID"], favList[i]["title"], favList[i]["image"]));
     }
-//    favourites.add(Favourite(
-//        "NJrpv4UN5781vLichAdr",
-//        "Doritos Cheese flavour 65g",
-//        "https://target.scene7.com/is/image/Target/GUEST_b3c1fd21-ea1c-4e0c-851c-366612d86ea4"));
+    favourites.add(Favourite(
+        "NJrpv4UN5781vLichAdr",
+        "Doritos Cheese flavour 65g",
+        "https://target.scene7.com/is/image/Target/GUEST_b3c1fd21-ea1c-4e0c-851c-366612d86ea4"));
     return favourites;
   }
 }
