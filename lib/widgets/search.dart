@@ -10,15 +10,11 @@ class _SearchField extends State<SearchFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      style: Theme
-          .of(context)
-          .textTheme
-          .subtitle
-          .copyWith(
-        fontSize: 16,
-        fontWeight: FontWeight.normal,
-        height: 2,
-      ),
+      style: Theme.of(context).textTheme.subtitle.copyWith(
+            fontSize: 16,
+            fontWeight: FontWeight.normal,
+            height: 2,
+          ),
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,

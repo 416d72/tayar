@@ -83,6 +83,7 @@ class _BrowsePageState extends State<BrowsePage> {
                   offerCount = document['offers'].length;
                 }
                 if (offerCount > 0) {
+                  // والمصحف ما أعرف بتشتغل ازاي
                   lowestPrice = List<double>.from(document['offers']
                           .map((i) => i['price'].toDouble())
                           .toList())
