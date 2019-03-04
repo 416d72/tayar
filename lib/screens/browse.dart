@@ -88,8 +88,10 @@ class _BrowsePageState extends State<BrowsePage> {
                           .toList())
                       .reduce(min);
                 }
-                return productCard(
-                    context, id, document['title'], document['image'],
+                return ProductCard(
+                    documentID: id,
+                    title: document['title'],
+                    image: document['image'],
                     price: lowestPrice);
               }
             }),

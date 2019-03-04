@@ -25,21 +25,28 @@ class DBHelper {
   void _onCreate(Database db, int version) async {
     await db.execute(
         "CREATE TABLE Favourites(`id` INTEGER PRIMARY KEY, `documentID` TEXT, `title` TEXT, `image` TEXT);");
-    print("Created `Favourites` table");
+  }
+
+  Future<bool> check(String documentID) async {
+    var dbClient = await db;
+    var result = Sqflite.firstIntValue(await dbClient.rawQuery(
+        "SELECT COUNT(`id`) FROM Favourites WHERE `documentID` = '$documentID';"));
+    if (result == 1) {
+      return true;
+    }
+    return false;
   }
 
   Future<bool> toggleFavourite(Favourite favourite) async {
-    var dbClient = await db;
-    var result = Sqflite.firstIntValue(await dbClient.rawQuery(
-        "SELECT COUNT(`id`) FROM Favourites WHERE `documentID` = ${favourite
-            .documentID};"));
-    if (result == 0) {
-      _addFavourite(favourite);
-      return true;
-    } else {
-      _removeFavourite(favourite);
-      return false;
-    }
+    return check(favourite.documentID).then((result) {
+      if (result) {
+        _removeFavourite(favourite);
+        return false;
+      } else {
+        _addFavourite(favourite);
+        return true;
+      }
+    });
   }
 
   void _addFavourite(Favourite favourite) async {
@@ -49,16 +56,15 @@ class DBHelper {
           "INSERT INTO Favourites(`documentID`,`title`,`image`) VALUES ('${favourite
               .documentID}', '${favourite.title}','${favourite.image}');");
     });
-    print("Added ${favourite.title}");
   }
 
   void _removeFavourite(Favourite favourite) async {
     var dbClient = await db;
     await dbClient.transaction((txn) async {
       return await txn.rawDelete(
-          "DELETE FROM Favourites WHERE documentID = ${favourite.documentID};");
+          "DELETE FROM Favourites WHERE documentID = '${favourite
+              .documentID}';");
     });
-    print("Removed ${favourite.title}");
   }
 
   Future<List<Favourite>> getFavourites() async {
@@ -69,10 +75,6 @@ class DBHelper {
       favourites.add(new Favourite(
           favList[i]["documentID"], favList[i]["title"], favList[i]["image"]));
     }
-    favourites.add(Favourite(
-        "NJrpv4UN5781vLichAdr",
-        "Doritos Cheese flavour 65g",
-        "https://target.scene7.com/is/image/Target/GUEST_b3c1fd21-ea1c-4e0c-851c-366612d86ea4"));
     return favourites;
   }
 }

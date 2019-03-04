@@ -26,9 +26,11 @@ class _Favourites extends State<FavouritesPage> {
               crossAxisCount: 2,
               children: List.generate(snapshot.data.length, (index) {
                 var document = snapshot.data[index];
-                return productCard(context, document.documentID, document.title,
-                    document.image,
-                    price: -1);
+                return ProductCard(
+                  documentID: document.documentID,
+                  title: document.title,
+                  image: document.image,
+                );
               }),
             );
           }
