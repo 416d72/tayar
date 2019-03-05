@@ -53,8 +53,7 @@ class DBHelper {
     var dbClient = await db;
     await dbClient.transaction((txn) async {
       return await txn.rawInsert(
-          "INSERT INTO Favourites(`documentID`,`title`,`image`) VALUES ('${favourite
-              .documentID}', '${favourite.title}','${favourite.image}');");
+          "INSERT INTO Favourites(`documentID`,`title`,`image`) VALUES ('${favourite.documentID}', '${favourite.title}','${favourite.image}');");
     });
   }
 
@@ -62,8 +61,7 @@ class DBHelper {
     var dbClient = await db;
     await dbClient.transaction((txn) async {
       return await txn.rawDelete(
-          "DELETE FROM Favourites WHERE documentID = '${favourite
-              .documentID}';");
+          "DELETE FROM Favourites WHERE documentID = '${favourite.documentID}';");
     });
   }
 
