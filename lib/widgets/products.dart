@@ -35,24 +35,11 @@ class _ProductCardState extends State<ProductCard> {
       _priceText = "$price EGP";
     } else if (price == 0) {
       _priceText = "Not Available";
-//    _notAvailable = Container(
-//      decoration: BoxDecoration(
-//        color: Colors.white,
-//        backgroundBlendMode: BlendMode.color,
-//      ),
-//      child: Center(
-//        child: Opacity(
-//          opacity: 0.1,
-//          child: Text(""),
-//        ),
-//      ),
-//    );
     }
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         App.router.navigateTo(context, "/product?id=$documentID");
       },
-      onDoubleTap: null,
       child: Container(
         decoration: cardShadow(context),
         child: Stack(
